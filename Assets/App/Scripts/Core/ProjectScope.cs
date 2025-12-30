@@ -7,11 +7,14 @@ namespace App.Core
     public class ProjectScope : LifetimeScope
     {
         [SerializeField] private Installer[] _installers;
+        [SerializeField] private Canvas _mainCanvas;
         
         protected override void Configure(IContainerBuilder builder)
         {
             foreach (var installer in _installers) 
                 installer.Install(builder);
+
+            builder.RegisterInstance(_mainCanvas);
         }
     }
 }
