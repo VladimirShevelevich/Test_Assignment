@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7942ae6fe01348c3bc191f0730b3d238, type: 3}
   m_Name: TaskLoaderInstaller
   m_EditorClassIdentifier: 
+  _taskLoaderContent: {fileID: 11400000, guid: 6d76c35fd807b9f439b6f12dfc7b76b2, type: 2}

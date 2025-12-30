@@ -1,11 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using VContainer.Unity;
+using Object = UnityEngine.Object;
 
 namespace App.TaskLoader
 {
     public class TaskLoaderService : IInitializable, ITaskLoaderService
     {
+        private readonly TaskLoaderContent _taskLoaderContent;
+        private readonly LifetimeScope _projectScope;
         private int _currentTaskIndex = -1;
+        private IDisposable _currentTaskScope;
+
+        public TaskLoaderService(TaskLoaderContent taskLoaderContent, LifetimeScope projectScope)
+        {
+            _taskLoaderContent = taskLoaderContent;
+            _projectScope = projectScope;
+        }
         
         public void Initialize()
         {
@@ -19,9 +30,13 @@ namespace App.TaskLoader
                 Debug.Log($"The task {taskIndex} is already loaded");
                 return;
             }
+
+            _currentTaskScope?.Dispose();
             
-            Debug.Log($"Loading task by index {taskIndex}");
+            var scopePrefab = _taskLoaderContent.TasksScopes[taskIndex];
+            _currentTaskScope = _projectScope.CreateChildFromPrefab(scopePrefab);
             _currentTaskIndex = taskIndex;
+            Debug.Log($@"Task {taskIndex+1} has been loaded");
         }
     }
 }
