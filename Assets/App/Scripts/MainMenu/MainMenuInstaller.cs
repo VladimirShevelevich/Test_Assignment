@@ -17,7 +17,7 @@ namespace App.MainMenu
             {
                 ep.Add<MainMenuFactory>();
             });
-            builder.Register<MainMenuPresenter>(Lifetime.Singleton);
+            builder.Register<MainMenuPresenter>(Lifetime.Transient);
         }
     }
 }

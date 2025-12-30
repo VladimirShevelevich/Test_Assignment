@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using VContainer;
 using VContainer.Unity;
 
 namespace App.MainMenu
@@ -7,21 +8,25 @@ namespace App.MainMenu
     {
         private readonly MainMenuContent _mainMenuContent;
         private readonly Canvas _mainCanvas;
+        private readonly IObjectResolver _objectResolver;
 
-        public MainMenuFactory(MainMenuContent mainMenuContent, Canvas mainCanvas)
+        public MainMenuFactory(MainMenuContent mainMenuContent, Canvas mainCanvas, IObjectResolver objectResolver)
         {
             _mainMenuContent = mainMenuContent;
             _mainCanvas = mainCanvas;
+            _objectResolver = objectResolver;
         }
         
         public void Initialize()
         {
-            CreateView();
+            var view = CreateView();
+            var presenter = _objectResolver.Resolve<MainMenuPresenter>();
+            presenter.BindView(view);
         }
 
-        private void CreateView()
+        private MainMenuView CreateView()
         {
-            Object.Instantiate(_mainMenuContent.ViewPrefab, _mainCanvas.transform);
+            return Object.Instantiate(_mainMenuContent.ViewPrefab, _mainCanvas.transform);
         }
     }
 }
