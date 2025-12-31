@@ -76,4 +76,6 @@ MonoBehaviour:
   - {fileID: -638057480, guid: 5f0074f1c36da4a71bf1a5e1528a2f35, type: 3}
   - {fileID: 8297528716688777880, guid: 5f0074f1c36da4a71bf1a5e1528a2f35, type: 3}
   <CardsGap>k__BackingField: 0.1
+  <MoveDuration>k__BackingField: 0.5
+  <MoveTimeInterval>k__BackingField: 1
   <InitialCardsAmount>k__BackingField: 144

@@ -5,6 +5,7 @@ using App.Cards.Deck;
 using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -29,7 +30,19 @@ namespace App.Scripts.Cards.Decks
             _firstDeck = _decksService.Decks[0];
             _secondDeck = _decksService.Decks[1];
             
+            SubscribeOnMovingComplete();
             StartMovingRoutineAsync();
+        }
+
+        private void SubscribeOnMovingComplete()
+        {
+            AddDisposable(_firstDeck.OnMovementComplete.Where(index => index == _decksContent.InitialCardsAmount-1).Subscribe(_ =>
+                OnMovingComplete()));
+        }
+
+        private void OnMovingComplete()
+        {
+            Debug.Log("Movement is completed");
         }
 
         private async UniTaskVoid StartMovingRoutineAsync()
