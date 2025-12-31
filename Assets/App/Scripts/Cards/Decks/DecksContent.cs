@@ -7,8 +7,10 @@ namespace App.Cards
     public class DecksContent : ScriptableObject
     {
         [field: SerializeField] public DeckView DeckPrefab { get; private set; }
+        [field: SerializeField] public CardView CardPrefab { get; private set; }
         [field: SerializeField] public Vector3[] DecksPositions { get; private set; }
-        [field: SerializeField] public CardView[] CardsPrefabs { get; private set; }
+        [field: SerializeField] public Sprite[] CardsSprites { get; private set; }
         [field: SerializeField] public float CardsGap { get; private set; }
+        [field: SerializeField] public int InitialCardsAmount { get; private set; }
     }
 }

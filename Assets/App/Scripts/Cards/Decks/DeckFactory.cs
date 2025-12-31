@@ -11,15 +11,10 @@ namespace App.Cards.Deck
             _decksContent = decksContent;
         }
         
-        public IDeck CreateDeck(int deckIndex, CardView[] initialCardsPrefabs = null)
+        public IDeck CreateDeck(int deckIndex, int initialCardsAmount)
         {
             var deck = CreateDeck(deckIndex);
-
-            if (initialCardsPrefabs != null)
-            {
-                CreateCards(initialCardsPrefabs, deck);
-            }
-
+            CreateCards(initialCardsAmount, deck);
             return deck;
         }
 
@@ -29,20 +24,20 @@ namespace App.Cards.Deck
             return Object.Instantiate(_decksContent.DeckPrefab, position, Quaternion.identity);
         }
 
-        private void CreateCards(CardView[] initialCardsPrefabs, DeckView deck)
+        private void CreateCards(int initialCardAmount, DeckView deck)
         {
-            for (var i = 0; i < initialCardsPrefabs.Length; i++)
+            for (var i = 0; i < initialCardAmount; i++)
             {
                 var position = deck.transform.position + Vector3.right * i * _decksContent.CardsGap;
-                var cardPrefab = initialCardsPrefabs[i];
-                CreateCard(cardPrefab, deck.transform, position, i);
+                var randomSprite = _decksContent.CardsSprites[Random.Range(0, _decksContent.CardsSprites.Length)];
+                CreateCard(randomSprite, deck.transform, position, i);
             }
         }
 
-        private void CreateCard(CardView prefab, Transform parent, Vector3 position, int index)
+        private void CreateCard(Sprite sprite, Transform parent, Vector3 position, int index)
         {
-            var view = Object.Instantiate(prefab, position, Quaternion.identity, parent);
-            view.SerSortingOrder(index);
+            var view = Object.Instantiate(_decksContent.CardPrefab, position, Quaternion.identity, parent);
+            view.SetSprite(sprite, index);
         }
     }
 }

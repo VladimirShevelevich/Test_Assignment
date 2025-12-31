@@ -22,8 +22,8 @@ namespace App.Cards
 
         private void CreateDecks()
         {
-            var firstDeck = _deckFactory.CreateDeck(0, _decksContent.CardsPrefabs);
-            var secondDeck = _deckFactory.CreateDeck(1);
+            var firstDeck = _deckFactory.CreateDeck(0, _decksContent.InitialCardsAmount);
+            var secondDeck = _deckFactory.CreateDeck(1, 0);
             AddDisposable(firstDeck);
             AddDisposable(secondDeck);
         }
