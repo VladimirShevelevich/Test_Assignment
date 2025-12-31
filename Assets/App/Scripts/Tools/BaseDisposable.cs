@@ -1,7 +1,7 @@
 ﻿using System;
 using UniRx;
 
-namespace Arkanoid.Tools.Disposable
+namespace App.Tools
 {
     public abstract class BaseDisposable : IDisposable
     {
@@ -15,7 +15,7 @@ namespace Arkanoid.Tools.Disposable
 
         public virtual void Dispose()
         {
-            _compositeDisposable.Dispose();
+            _compositeDisposable?.Dispose();
         }
     }
 }

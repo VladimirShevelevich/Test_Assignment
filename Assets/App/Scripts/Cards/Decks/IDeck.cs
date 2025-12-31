@@ -1,7 +1,9 @@
-﻿namespace App.Cards.Deck
+﻿using System;
+
+namespace App.Cards.Deck
 {
-    public interface IDeck
+    public interface IDeck : IDisposable
     {
-        
+        void SpawnCards(CardView[] prefabs);
     }
 }
