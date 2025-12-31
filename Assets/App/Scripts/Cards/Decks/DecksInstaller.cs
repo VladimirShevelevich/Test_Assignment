@@ -18,7 +18,8 @@ namespace App.Scripts.Cards.Decks
             builder.RegisterInstance(_decksContent);
             builder.UseEntryPoints(ep =>
             {
-                ep.Add<DecksService>();
+                ep.Add<DecksService>().AsSelf();
+                ep.Add<CardsMover>();
             });
         }
     }

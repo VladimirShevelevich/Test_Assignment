@@ -11,7 +11,7 @@ namespace App.Cards.Deck
             _decksContent = decksContent;
         }
         
-        public IDeck CreateDeck(int deckIndex, int initialCardsAmount)
+        public DeckView CreateDeck(int deckIndex, int initialCardsAmount)
         {
             var deck = CreateDeck(deckIndex);
             CreateCards(initialCardsAmount, deck);
@@ -37,7 +37,8 @@ namespace App.Cards.Deck
         private void CreateCard(Sprite sprite, Transform parent, Vector3 position, int index)
         {
             var view = Object.Instantiate(_decksContent.CardPrefab, position, Quaternion.identity, parent);
-            view.SetSprite(sprite, index);
+            view.SetSprite(sprite);
+            view.SetOrderIndex(index);
         }
     }
 }

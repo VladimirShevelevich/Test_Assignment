@@ -11,6 +11,8 @@ namespace App.Cards
         [field: SerializeField] public Vector3[] DecksPositions { get; private set; }
         [field: SerializeField] public Sprite[] CardsSprites { get; private set; }
         [field: SerializeField] public float CardsGap { get; private set; }
+        [field: SerializeField] public float MoveDuration { get; private set; }
+        [field: SerializeField] public float MoveTimeInterval { get; private set; }
         [field: SerializeField] public int InitialCardsAmount { get; private set; }
     }
 }

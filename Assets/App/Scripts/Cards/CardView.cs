@@ -6,10 +6,14 @@ namespace App.Cards
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        public void SetSprite(Sprite sprite, int orderIndex)
+        public void SetSprite(Sprite sprite)
         {
             _spriteRenderer.sprite = sprite;
-            _spriteRenderer.sortingOrder = orderIndex;
+        }
+
+        public void SetOrderIndex(int index)
+        {
+            _spriteRenderer.sortingOrder = index;
         }
     }
 }
