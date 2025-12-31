@@ -161,3 +161,4 @@ MonoBehaviour:
   - {fileID: 7342575542676160526, guid: 7b727d0359a9e6542b28accb08290a5e, type: 3}
   - {fileID: 6330207009747849579, guid: babe1717ef6685c42a51cca55797e30d, type: 3}
   - {fileID: 5249344434907135539, guid: d79a2e71c0faf754f98162a459993948, type: 3}
+  <CardsGap>k__BackingField: 0.1

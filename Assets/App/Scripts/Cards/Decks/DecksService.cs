@@ -22,12 +22,10 @@ namespace App.Cards
 
         private void CreateDecks()
         {
-            var firstDeck = _deckFactory.CreateDeck(0);
+            var firstDeck = _deckFactory.CreateDeck(0, _decksContent.CardsPrefabs);
             var secondDeck = _deckFactory.CreateDeck(1);
             AddDisposable(firstDeck);
             AddDisposable(secondDeck);
-
-            firstDeck.SpawnCards(_decksContent.CardsPrefabs);
         }
     }
 }

@@ -9,5 +9,6 @@ namespace App.Cards
         [field: SerializeField] public DeckView DeckPrefab { get; private set; }
         [field: SerializeField] public Vector3[] DecksPositions { get; private set; }
         [field: SerializeField] public CardView[] CardsPrefabs { get; private set; }
+        [field: SerializeField] public float CardsGap { get; private set; }
     }
 }
