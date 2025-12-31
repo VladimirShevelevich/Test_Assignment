@@ -14,7 +14,8 @@ namespace App.Cards.Deck
 
         public void Dispose()
         {
-            Destroy(gameObject);
+            if (gameObject != null)
+                Destroy(gameObject);
         }
     }
 }

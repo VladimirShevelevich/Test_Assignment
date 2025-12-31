@@ -35,13 +35,14 @@ namespace App.Cards.Deck
             {
                 var position = deck.transform.position + Vector3.right * i * _decksContent.CardsGap;
                 var cardPrefab = initialCardsPrefabs[i];
-                CreateCard(cardPrefab, deck.transform, position);
+                CreateCard(cardPrefab, deck.transform, position, i);
             }
         }
 
-        private void CreateCard(CardView prefab, Transform parent, Vector3 position)
+        private void CreateCard(CardView prefab, Transform parent, Vector3 position, int index)
         {
-            Object.Instantiate(prefab, position, Quaternion.identity, parent);
+            var view = Object.Instantiate(prefab, position, Quaternion.identity, parent);
+            view.SerSortingOrder(index);
         }
     }
 }
