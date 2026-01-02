@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
-using App.Cards.Deck;
 using App.Tools;
-using Arkanoid.Tools.Disposable;
 using VContainer.Unity;
 
 namespace App.Cards
 {
-    public class DecksService : BaseDisposable, IInitializable
+    public class CardsService : BaseDisposable, IInitializable
     {
         private readonly DeckFactory _deckFactory;
-        private readonly DecksContent _decksContent;
+        private readonly CardsContent _cardsContent;
 
         public List<DeckView> Decks { get; private set; } = new();
         
-        public DecksService(DeckFactory deckFactory, DecksContent decksContent)
+        public CardsService(DeckFactory deckFactory, CardsContent cardsContent)
         {
             _deckFactory = deckFactory;
-            _decksContent = decksContent;
+            _cardsContent = cardsContent;
         }
         
         public void Initialize()
@@ -26,7 +24,7 @@ namespace App.Cards
 
         private void CreateDecks()
         {
-            Decks.Add(_deckFactory.CreateDeck(0, _decksContent.InitialCardsAmount));
+            Decks.Add(_deckFactory.CreateDeck(0, _cardsContent.InitialCardsAmount));
             Decks.Add(_deckFactory.CreateDeck(1, 0));
             foreach (var deck in Decks) 
                 AddDisposable(new GameObjectDisposer(deck.gameObject));

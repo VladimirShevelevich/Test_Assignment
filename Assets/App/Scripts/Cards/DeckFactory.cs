@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using VContainer;
 
-namespace App.Cards.Deck
+namespace App.Cards
 {
     public class DeckFactory
     {
-        private readonly DecksContent _decksContent;
+        private readonly CardsContent _cardsContent;
         private readonly IObjectResolver _objectResolver;
 
-        public DeckFactory(DecksContent decksContent, IObjectResolver objectResolver)
+        public DeckFactory(CardsContent cardsContent, IObjectResolver objectResolver)
         {
-            _decksContent = decksContent;
+            _cardsContent = cardsContent;
             _objectResolver = objectResolver;
         }
         
@@ -24,15 +24,15 @@ namespace App.Cards.Deck
 
         private DeckView CreateDeck(int deckIndex)
         {
-            var position = _decksContent.DecksPositions[deckIndex];
-            return Object.Instantiate(_decksContent.DeckPrefab, position, Quaternion.identity);
+            var position = _cardsContent.DecksPositions[deckIndex];
+            return Object.Instantiate(_cardsContent.DeckPrefab, position, Quaternion.identity);
         }
 
         private void CreateCards(int initialCardAmount, DeckView deck)
         {
             for (var i = 0; i < initialCardAmount; i++)
             {
-                var randomSprite = _decksContent.CardsSprites[Random.Range(0, _decksContent.CardsSprites.Length)];
+                var randomSprite = _cardsContent.CardsSprites[Random.Range(0, _cardsContent.CardsSprites.Length)];
                 var card = CreateCard(randomSprite);
                 deck.AddCard(card);
             }
@@ -40,7 +40,7 @@ namespace App.Cards.Deck
 
         private CardView CreateCard(Sprite sprite)
         {
-            var view = Object.Instantiate(_decksContent.CardPrefab);
+            var view = Object.Instantiate(_cardsContent.CardPrefab);
             view.SetSprite(sprite);
             return view;
         }

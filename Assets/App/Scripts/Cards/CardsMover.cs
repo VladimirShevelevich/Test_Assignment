@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading;
-using App.Cards;
-using App.Cards.Deck;
 using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
@@ -9,26 +7,26 @@ using UniRx;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace App.Scripts.Cards.Decks
+namespace App.Cards
 {
     public class CardsMover : BaseDisposable, IInitializable
     {
-        private readonly DecksService _decksService;
-        private readonly DecksContent _decksContent;
+        private readonly CardsService _cardsService;
+        private readonly CardsContent _cardsContent;
         
         private DeckView _firstDeck;
         private DeckView _secondDeck;
 
-        public CardsMover(DecksService decksService, DecksContent decksContent)
+        public CardsMover(CardsService cardsService, CardsContent cardsContent)
         {
-            _decksService = decksService;
-            _decksContent = decksContent;
+            _cardsService = cardsService;
+            _cardsContent = cardsContent;
         }
         
         public void Initialize()
         {
-            _firstDeck = _decksService.Decks[0];
-            _secondDeck = _decksService.Decks[1];
+            _firstDeck = _cardsService.Decks[0];
+            _secondDeck = _cardsService.Decks[1];
             
             AddDisposable(_secondDeck.CardsAmount.Subscribe(OnSecondDeckAmountChanged));
             StartMovingRoutineAsync();
@@ -36,7 +34,7 @@ namespace App.Scripts.Cards.Decks
         
         private void OnSecondDeckAmountChanged(int amount)
         {
-            if (amount >= _decksContent.InitialCardsAmount) 
+            if (amount >= _cardsContent.InitialCardsAmount) 
                 OnMovingComplete();
         }
 
@@ -55,7 +53,7 @@ namespace App.Scripts.Cards.Decks
             {
                 var cardToMove = _firstDeck.PopCard();
                 _secondDeck.PullCard(cardToMove);
-                await UniTask.Delay(TimeSpan.FromSeconds(_decksContent.MoveTimeInterval));
+                await UniTask.Delay(TimeSpan.FromSeconds(_cardsContent.MoveTimeInterval));
                 
                 if (tokenSource.IsCancellationRequested)
                     return;

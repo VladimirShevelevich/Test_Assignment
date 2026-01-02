@@ -3,19 +3,19 @@ using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace App.Cards.Deck
+namespace App.Cards
 {
     public class DeckView : MonoBehaviour
     {
         public IReadOnlyReactiveProperty<int> CardsAmount => _cardsAmount;
         private readonly ReactiveProperty<int> _cardsAmount = new();
         
-        private DecksContent _decksContent;
+        private CardsContent _cardsContent;
 
         [Inject]
-        public void Construct(DecksContent decksContent)
+        public void Construct(CardsContent cardsContent)
         {
-            _decksContent = decksContent;
+            _cardsContent = cardsContent;
         }
 
         public void AddCard(CardView cardView)
@@ -38,7 +38,7 @@ namespace App.Cards.Deck
         {
             cardView.transform.SetParent(transform);
             var position = GetNewCardPosition();
-            cardView.transform.DOMove(position, _decksContent.MoveDuration).SetLink(gameObject).OnComplete(() =>
+            cardView.transform.DOMove(position, _cardsContent.MoveDuration).SetLink(gameObject).OnComplete(() =>
                 OnCardPullComplete(cardView));
         }
 
@@ -50,7 +50,7 @@ namespace App.Cards.Deck
 
         private Vector3 GetNewCardPosition()
         {
-            return transform.position + Vector3.right * _cardsAmount.Value * _decksContent.CardsGap;
+            return transform.position + Vector3.right * _cardsAmount.Value * _cardsContent.CardsGap;
         }
     }
 }

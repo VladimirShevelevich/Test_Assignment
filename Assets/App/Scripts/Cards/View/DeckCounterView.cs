@@ -1,9 +1,8 @@
-﻿using App.Cards.Deck;
-using TMPro;
+﻿using TMPro;
 using UniRx;
 using UnityEngine;
 
-namespace App.Scripts.Cards.Decks
+namespace App.Cards
 {
     public class DeckCounterView : MonoBehaviour
     {

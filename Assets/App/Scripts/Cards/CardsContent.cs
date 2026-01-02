@@ -1,10 +1,9 @@
-﻿using App.Cards.Deck;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace App.Cards
 {
     [CreateAssetMenu(fileName = "DecksContent", menuName = "Content/Decks")]
-    public class DecksContent : ScriptableObject
+    public class CardsContent : ScriptableObject
     {
         [field: SerializeField] public DeckView DeckPrefab { get; private set; }
         [field: SerializeField] public CardView CardPrefab { get; private set; }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Arkanoid.Tools.Disposable
+namespace App.Tools
 {
     public class GameObjectDisposer : IDisposable
     {
