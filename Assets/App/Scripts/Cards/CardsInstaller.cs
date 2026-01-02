@@ -1,4 +1,5 @@
-﻿using App.Core;
+﻿using App.Cards.UI;
+using App.Core;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -17,7 +18,8 @@ namespace App.Cards
             builder.UseEntryPoints(ep =>
             {
                 ep.Add<CardsService>().AsSelf();
-                ep.Add<CardsMover>();
+                ep.Add<CardsMover>().AsSelf();
+                ep.Add<MessagePresenter>();
             });
         }
     }

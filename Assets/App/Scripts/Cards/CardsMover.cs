@@ -4,13 +4,15 @@ using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
 using UniRx;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace App.Cards
 {
     public class CardsMover : BaseDisposable, IInitializable
     {
+        public IObservable<Unit> OnMovingComplete => _onMovingComplete;
+        private readonly ReactiveCommand _onMovingComplete = new();
+        
         private readonly CardsService _cardsService;
         private readonly CardsContent _cardsContent;
         
@@ -34,13 +36,8 @@ namespace App.Cards
         
         private void OnSecondDeckAmountChanged(int amount)
         {
-            if (amount >= _cardsContent.InitialCardsAmount) 
-                OnMovingComplete();
-        }
-
-        private void OnMovingComplete()
-        {
-            Debug.Log("Movement is completed");
+            if (amount >= _cardsContent.InitialCardsAmount)
+                _onMovingComplete?.Execute();
         }
 
         private async UniTaskVoid StartMovingRoutineAsync()

@@ -9,7 +9,7 @@ namespace App.Cards
         private readonly DeckFactory _deckFactory;
         private readonly CardsContent _cardsContent;
 
-        public List<DeckView> Decks { get; private set; } = new();
+        public List<DeckView> Decks { get; } = new();
         
         public CardsService(DeckFactory deckFactory, CardsContent cardsContent)
         {

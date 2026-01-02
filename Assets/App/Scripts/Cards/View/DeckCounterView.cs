@@ -22,7 +22,7 @@ namespace App.Cards
 
         private void UpdateCounter(int amount)
         {
-            _counterText.text = amount.ToString();
+            _counterText.text = amount > 0 ? amount.ToString() : "";
         }
     }
 }

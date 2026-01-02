@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2856bcbd6d844dd39a2939eda0672ad8, type: 3}
-  m_Name: DecksContent
+  m_Name: CardsContent
   m_EditorClassIdentifier: 
   <DeckPrefab>k__BackingField: {fileID: 7081028087267079573, guid: e075568ed909c8049a43701fbe7da37b, type: 3}
   <CardPrefab>k__BackingField: {fileID: 108323868576951243, guid: 92ed121e1092b2b47b16d1c863cb5a6b, type: 3}
@@ -79,3 +79,4 @@ MonoBehaviour:
   <MoveDuration>k__BackingField: 0.5
   <MoveTimeInterval>k__BackingField: 1
   <InitialCardsAmount>k__BackingField: 144
+  <MessagePrefab>k__BackingField: {fileID: 6602124118375942655, guid: b1a85c769e025d747baad5f969b3abf0, type: 3}

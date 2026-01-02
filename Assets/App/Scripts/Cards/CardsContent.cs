@@ -13,5 +13,6 @@ namespace App.Cards
         [field: SerializeField] public float MoveDuration { get; private set; }
         [field: SerializeField] public float MoveTimeInterval { get; private set; }
         [field: SerializeField] public int InitialCardsAmount { get; private set; }
+        [field: SerializeField] public GameObject MessagePrefab { get; private set; }
     }
 }
