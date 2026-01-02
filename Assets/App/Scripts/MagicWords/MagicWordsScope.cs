@@ -11,6 +11,8 @@ namespace App.MagicWords
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_content);
+            builder.Register<IDataLoader, UrlDataLoader>(Lifetime.Scoped);
+            builder.Register<DataParser>(Lifetime.Scoped);
         }
     }
 }
