@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using App.AceOfShadows.View;
+using UnityEngine;
 
-namespace App.Cards
+namespace App.AceOfShadows
 {
     [CreateAssetMenu(fileName = "DecksContent", menuName = "Content/Decks")]
     public class CardsContent : ScriptableObject

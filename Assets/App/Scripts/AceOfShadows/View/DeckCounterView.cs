@@ -2,7 +2,7 @@
 using UniRx;
 using UnityEngine;
 
-namespace App.Cards
+namespace App.AceOfShadows.View
 {
     public class DeckCounterView : MonoBehaviour
     {

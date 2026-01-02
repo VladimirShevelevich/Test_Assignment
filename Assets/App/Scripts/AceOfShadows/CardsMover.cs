@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading;
+using App.AceOfShadows.View;
 using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using VContainer.Unity;
 
-namespace App.Cards
+namespace App.AceOfShadows
 {
     public class CardsMover : BaseDisposable, IInitializable
     {

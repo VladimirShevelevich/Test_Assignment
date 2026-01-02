@@ -3,7 +3,7 @@ using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace App.Cards
+namespace App.AceOfShadows.View
 {
     public class DeckView : MonoBehaviour
     {

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using App.AceOfShadows.View;
 using App.Tools;
 using VContainer.Unity;
 
-namespace App.Cards
+namespace App.AceOfShadows
 {
     public class CardsService : BaseDisposable, IInitializable
     {

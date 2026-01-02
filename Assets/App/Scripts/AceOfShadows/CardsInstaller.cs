@@ -1,10 +1,10 @@
-﻿using App.Cards.UI;
+﻿using App.AceOfShadows.UI;
 using App.Core;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace App.Cards
+namespace App.AceOfShadows
 {
     [CreateAssetMenu(fileName = "CardsInstaller", menuName = "Installer/Cards")]
     public class CardsInstaller : Installer

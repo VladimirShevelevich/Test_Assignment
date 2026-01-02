@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace App.Cards
+namespace App.AceOfShadows.View
 {
     public class CardView : MonoBehaviour
     {

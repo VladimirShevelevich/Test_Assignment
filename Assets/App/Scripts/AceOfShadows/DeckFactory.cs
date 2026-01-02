@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using App.AceOfShadows.View;
+using UnityEngine;
 using VContainer;
 
-namespace App.Cards
+namespace App.AceOfShadows
 {
     public class DeckFactory
     {

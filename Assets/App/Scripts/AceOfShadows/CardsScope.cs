@@ -3,7 +3,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace App.Cards
+namespace App.AceOfShadows
 {
     public class CardsScope : LifetimeScope
     {
