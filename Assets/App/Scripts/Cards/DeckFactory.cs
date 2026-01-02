@@ -25,7 +25,9 @@ namespace App.Cards
         private DeckView CreateDeck(int deckIndex)
         {
             var position = _cardsContent.DecksPositions[deckIndex];
-            return Object.Instantiate(_cardsContent.DeckPrefab, position, Quaternion.identity);
+            var deck = Object.Instantiate(_cardsContent.DeckPrefab, position, Quaternion.identity);
+            deck.SetDeckOrderIndex(deckIndex * _cardsContent.InitialCardsAmount);
+            return deck;
         }
 
         private void CreateCards(int initialCardAmount, DeckView deck)

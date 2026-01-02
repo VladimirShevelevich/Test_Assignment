@@ -11,6 +11,7 @@ namespace App.Cards
         private readonly ReactiveProperty<int> _cardsAmount = new();
         
         private CardsContent _cardsContent;
+        private int _deckOrderIndex;
 
         [Inject]
         public void Construct(CardsContent cardsContent)
@@ -18,11 +19,14 @@ namespace App.Cards
             _cardsContent = cardsContent;
         }
 
+        public void SetDeckOrderIndex(int orderIndex) =>
+            _deckOrderIndex = orderIndex;
+
         public void AddCard(CardView cardView)
         {
             cardView.transform.SetParent(transform);
             cardView.transform.position = GetNewCardPosition();
-            cardView.SetOrderIndex(_cardsAmount.Value);
+            cardView.SetOrderIndex(_deckOrderIndex + _cardsAmount.Value);
             _cardsAmount.Value++;
         }
 
@@ -37,6 +41,7 @@ namespace App.Cards
         public void PullCard(CardView cardView)
         {
             cardView.transform.SetParent(transform);
+            cardView.SetOrderIndex(_deckOrderIndex + _cardsAmount.Value);
             var position = GetNewCardPosition();
             cardView.transform.DOMove(position, _cardsContent.MoveDuration).SetLink(gameObject).OnComplete(() =>
                 OnCardPullComplete(cardView));
@@ -44,7 +49,6 @@ namespace App.Cards
 
         private void OnCardPullComplete(CardView cardView)
         {
-            cardView.SetOrderIndex(_cardsAmount.Value);
             _cardsAmount.Value++;
         }
 
