@@ -6,5 +6,6 @@ namespace App.MagicWords
     public class MagicWordsContent : ScriptableObject
     {
         [field: SerializeField] public string DataUrl { get; private set; }
+        [field: SerializeField] public DialogueView DialoguePrefab { get; private set; }
     }
 }

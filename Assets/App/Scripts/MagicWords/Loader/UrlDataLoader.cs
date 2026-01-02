@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
 
@@ -23,9 +22,9 @@ namespace App.MagicWords
             return data;
         }
 
-        private async Task<string> LoadJson()
+        private async UniTask<string> LoadJson()
         {
-            var request = UnityWebRequest.Get(_content.DataUrl);
+            using var request = UnityWebRequest.Get(_content.DataUrl);
             await request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
