@@ -48,4 +48,4 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _installers: []
+  _cardsContent: {fileID: 11400000, guid: c4dfe1a8259eceb4585a0bf9e7544a32, type: 2}

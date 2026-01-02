@@ -3,7 +3,7 @@ using UniRx;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace App.AceOfShadows.UI
+namespace App.AceOfShadows
 {
     public class MessagePresenter : BaseDisposable, IInitializable
     {

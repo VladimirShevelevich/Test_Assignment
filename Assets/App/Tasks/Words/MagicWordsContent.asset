@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4122e4d6cae24f65b157ea050c4ab35c, type: 3}
-  m_Name: CardssInstaller
+  m_Script: {fileID: 11500000, guid: 54638296b6fd453ebecab61b705e392f, type: 3}
+  m_Name: MagicWordsContent
   m_EditorClassIdentifier: 
-  _cardsContent: {fileID: 11400000, guid: c4dfe1a8259eceb4585a0bf9e7544a32, type: 2}

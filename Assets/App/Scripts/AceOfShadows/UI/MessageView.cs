@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace App.AceOfShadows.UI
+namespace App.AceOfShadows
 {
     public class MessageView : MonoBehaviour
     {

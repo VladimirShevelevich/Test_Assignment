@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4390902239802830127}
-  - component: {fileID: -2311269583112649518}
+  - component: {fileID: -9217749779018039640}
   m_Layer: 0
   m_Name: WordsScope
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2311269583112649518
+--- !u!114 &-9217749779018039640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835185302143441825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25fa099acce4f19b9d40de6342b7db0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ffa8e9ac6a54fda85b1c7eab89ddcf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _installers: []
+  _content: {fileID: 11400000, guid: 66fe129e970fd2d479dce898c22ed493, type: 2}
