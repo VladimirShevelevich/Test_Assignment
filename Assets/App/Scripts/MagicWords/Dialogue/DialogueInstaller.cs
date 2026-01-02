@@ -8,6 +8,7 @@ namespace App.MagicWords
         public static void Install(IContainerBuilder builder)
         {
             builder.Register<DialogueFactory>(Lifetime.Scoped);
+            builder.Register<AvatarLoader>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>
             {
                 ep.Add<DialoguePresenter>();
