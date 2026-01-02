@@ -1,42 +1,56 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UniRx;
 using UnityEngine;
+using VContainer;
 
 namespace App.Cards.Deck
 {
     public class DeckView : MonoBehaviour
     {
-        public IObservable<int> OnMovementComplete => _onMovementComplete;
-        private readonly ReactiveCommand<int> _onMovementComplete = new();
+        public IReadOnlyReactiveProperty<int> CardsAmount => _cardsAmount;
+        private readonly ReactiveProperty<int> _cardsAmount = new();
         
-        public Vector3 Position => 
-            transform.position;
+        private DecksContent _decksContent;
 
-        public int CardsCurrentAmount =>
-            transform.childCount;
-
-        public void MoveLastCardTo(Transform parent, Vector3 position, float duration, int orderIndex)
+        [Inject]
+        public void Construct(DecksContent decksContent)
         {
-            if (transform.childCount == 0)
-            {
-                Debug.LogError("Cards deck is empty");
-                return;
-            }
-
-            var card = transform.GetChild(transform.childCount - 1);
-            card.transform.SetParent(parent);
-            card.GetComponent<CardView>().SetOrderIndex(orderIndex);
-            card.DOMove(position, duration).SetLink(gameObject).OnComplete(() =>
-            {
-                _onMovementComplete.Execute(orderIndex);
-            });
+            _decksContent = decksContent;
         }
 
-        public void Dispose()
+        public void AddCard(CardView cardView)
         {
-            if (gameObject != null)
-                Destroy(gameObject);
+            cardView.transform.SetParent(transform);
+            cardView.transform.position = GetNewCardPosition();
+            cardView.SetOrderIndex(_cardsAmount.Value);
+            _cardsAmount.Value++;
+        }
+
+        public CardView PopCard()
+        {
+            var cardTransform = transform.GetChild(transform.childCount - 1);
+            cardTransform.parent = null;
+            _cardsAmount.Value--;
+            return cardTransform.GetComponent<CardView>();
+        }
+        
+        public void PullCard(CardView cardView)
+        {
+            cardView.transform.SetParent(transform);
+            var position = GetNewCardPosition();
+            cardView.transform.DOMove(position, _decksContent.MoveDuration).SetLink(gameObject).OnComplete(() =>
+                OnCardPullComplete(cardView));
+        }
+
+        private void OnCardPullComplete(CardView cardView)
+        {
+            cardView.SetOrderIndex(_cardsAmount.Value);
+            _cardsAmount.Value++;
+        }
+
+        private Vector3 GetNewCardPosition()
+        {
+            return transform.position + Vector3.right * _cardsAmount.Value * _decksContent.CardsGap;
         }
     }
 }

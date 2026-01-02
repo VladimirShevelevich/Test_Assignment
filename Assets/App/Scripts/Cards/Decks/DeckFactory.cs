@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
+using VContainer;
 
 namespace App.Cards.Deck
 {
     public class DeckFactory
     {
         private readonly DecksContent _decksContent;
+        private readonly IObjectResolver _objectResolver;
 
-        public DeckFactory(DecksContent decksContent)
+        public DeckFactory(DecksContent decksContent, IObjectResolver objectResolver)
         {
             _decksContent = decksContent;
+            _objectResolver = objectResolver;
         }
         
         public DeckView CreateDeck(int deckIndex, int initialCardsAmount)
         {
             var deck = CreateDeck(deckIndex);
+            _objectResolver.Inject(deck);
             CreateCards(initialCardsAmount, deck);
             return deck;
         }
@@ -28,17 +32,17 @@ namespace App.Cards.Deck
         {
             for (var i = 0; i < initialCardAmount; i++)
             {
-                var position = deck.transform.position + Vector3.right * i * _decksContent.CardsGap;
                 var randomSprite = _decksContent.CardsSprites[Random.Range(0, _decksContent.CardsSprites.Length)];
-                CreateCard(randomSprite, deck.transform, position, i);
+                var card = CreateCard(randomSprite);
+                deck.AddCard(card);
             }
         }
 
-        private void CreateCard(Sprite sprite, Transform parent, Vector3 position, int index)
+        private CardView CreateCard(Sprite sprite)
         {
-            var view = Object.Instantiate(_decksContent.CardPrefab, position, Quaternion.identity, parent);
+            var view = Object.Instantiate(_decksContent.CardPrefab);
             view.SetSprite(sprite);
-            view.SetOrderIndex(index);
+            return view;
         }
     }
 }

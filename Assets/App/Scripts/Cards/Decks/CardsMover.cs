@@ -30,14 +30,14 @@ namespace App.Scripts.Cards.Decks
             _firstDeck = _decksService.Decks[0];
             _secondDeck = _decksService.Decks[1];
             
-            SubscribeOnMovingComplete();
+            AddDisposable(_secondDeck.CardsAmount.Subscribe(OnSecondDeckAmountChanged));
             StartMovingRoutineAsync();
         }
-
-        private void SubscribeOnMovingComplete()
+        
+        private void OnSecondDeckAmountChanged(int amount)
         {
-            AddDisposable(_firstDeck.OnMovementComplete.Where(index => index == _decksContent.InitialCardsAmount-1).Subscribe(_ =>
-                OnMovingComplete()));
+            if (amount >= _decksContent.InitialCardsAmount) 
+                OnMovingComplete();
         }
 
         private void OnMovingComplete()
@@ -51,12 +51,10 @@ namespace App.Scripts.Cards.Decks
             var tokenSource = new CancellationTokenSource();
             AddDisposable(new TokenDisposer(tokenSource));
             
-            var index = 0;
-            while (_firstDeck.CardsCurrentAmount > 0)
+            while (_firstDeck.CardsAmount.Value > 0)
             {
-                var position = _secondDeck.Position + Vector3.right * _decksContent.CardsGap * index;
-                _firstDeck.MoveLastCardTo(_secondDeck.transform, position, _decksContent.MoveDuration, index);
-                index++;
+                var cardToMove = _firstDeck.PopCard();
+                _secondDeck.PullCard(cardToMove);
                 await UniTask.Delay(TimeSpan.FromSeconds(_decksContent.MoveTimeInterval));
                 
                 if (tokenSource.IsCancellationRequested)
