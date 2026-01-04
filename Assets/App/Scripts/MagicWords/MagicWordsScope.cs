@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using App.MagicWords.Loading;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -15,6 +16,7 @@ namespace App.MagicWords
             builder.Register<DialogueDataLoader>(Lifetime.Scoped);
             builder.Register<AvatarsDataLoader>(Lifetime.Scoped);
             builder.Register<MessageService>(Lifetime.Scoped);
+            builder.Register<LoadingService>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>
             {
                 ep.Add<InitializationQueue>();

@@ -15,3 +15,4 @@ MonoBehaviour:
   <DataUrl>k__BackingField: https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords
   <MessagePrefab>k__BackingField: {fileID: 8508938002134289656, guid: 529ec2924256d92429b483f9fea620c9, type: 3}
   <AvatarDefaultTexture>k__BackingField: {fileID: 0}
+  <LoadingPrefab>k__BackingField: {fileID: 7357411813777462089, guid: 56b0fd79f4564cc4abe5150e1cc2500b, type: 3}

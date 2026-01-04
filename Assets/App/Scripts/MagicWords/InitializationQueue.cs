@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using App.MagicWords.Loading;
 using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
@@ -13,15 +14,20 @@ namespace App.MagicWords
         private readonly WordsDataLoader _wordsDataLoader;
         private readonly DialogueDataLoader _dialogueDataLoader;
         private readonly AvatarsDataLoader _avatarsDataLoader;
+        private readonly LoadingService _loadingService;
 
         //Object dispose handling token
         private readonly CancellationTokenSource _cts = new();
         
-        public InitializationQueue(WordsDataLoader wordsDataLoader, DialogueDataLoader dialogueDataLoader, AvatarsDataLoader avatarsDataLoader)
+        public InitializationQueue(WordsDataLoader wordsDataLoader, 
+            DialogueDataLoader dialogueDataLoader, 
+            AvatarsDataLoader avatarsDataLoader,
+            LoadingService loadingService)
         {
             _wordsDataLoader = wordsDataLoader;
             _dialogueDataLoader = dialogueDataLoader;
             _avatarsDataLoader = avatarsDataLoader;
+            _loadingService = loadingService;
         }
         
         public void Initialize()
@@ -32,6 +38,8 @@ namespace App.MagicWords
 
         private async UniTaskVoid InitializeAsync()
         {
+            _loadingService.ShowLoading();
+            
             try
             {
                 await _wordsDataLoader.InitializeAsync(_cts.Token);
@@ -44,6 +52,7 @@ namespace App.MagicWords
             }
             
             Debug.Log("Initialization's compelted");
+            _loadingService.HideLoading();
         }
     }
 }
