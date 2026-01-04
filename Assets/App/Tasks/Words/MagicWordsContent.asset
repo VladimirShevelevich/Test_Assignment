@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MagicWordsContent
   m_EditorClassIdentifier: 
   <DataUrl>k__BackingField: https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords
-  <DialoguePrefab>k__BackingField: {fileID: 4646055414157194494, guid: 384fc909c67193d4eb623a72638f6d2f, type: 3}
+  <MessagePrefab>k__BackingField: {fileID: 8508938002134289656, guid: 529ec2924256d92429b483f9fea620c9, type: 3}

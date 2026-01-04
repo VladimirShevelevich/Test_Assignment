@@ -11,8 +11,12 @@ namespace App.MagicWords
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_content);
-            LoaderInstaller.Install(builder);
-            DialogueInstaller.Install(builder);
+            builder.Register<WordsDataLoader>(Lifetime.Scoped);
+            builder.Register<MessageService>(Lifetime.Scoped);
+            builder.UseEntryPoints(ep =>
+            {
+                ep.Add<InitializationQueue>();
+            });
         }
     }
 }

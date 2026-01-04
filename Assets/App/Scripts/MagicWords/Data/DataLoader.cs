@@ -1,21 +1,20 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace App.MagicWords
 {
-    public class AvatarLoader
+    public static class DataLoader
     {
-        public async UniTask<Texture2D> LoadAvatarAsync(string url)
+        public static async UniTask<string> LoadJsonAsync(string url)
         {
-            using var request = UnityWebRequestTexture.GetTexture(url);
+            using var request = UnityWebRequest.Get(url);
             await request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
                 throw new Exception(request.error);
 
-            return DownloadHandlerTexture.GetContent(request);
+            return request.downloadHandler.text;
         }
     }
 }
