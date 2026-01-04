@@ -35,7 +35,7 @@ namespace App.MagicWords
                     Debug.Log("Words data has been loaded");
                     return;
                 }
-                catch (OperationCanceledException e)
+                catch (OperationCanceledException)
                 {
                     Debug.Log($"Data loading has been canceled.");
                     return;
