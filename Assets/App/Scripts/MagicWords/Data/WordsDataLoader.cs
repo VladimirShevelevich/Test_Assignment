@@ -7,15 +7,12 @@ using UnityEngine;
 
 namespace App.MagicWords
 {
-    public class WordsDataLoader : BaseDisposable
+    public class WordsDataLoader
     {
         public WordsData Data { get; private set; }
         
         private readonly MagicWordsContent _magicWordsContent;
         private readonly MessageService _messageService;
-
-        //Object dispose handling token
-        private readonly CancellationTokenSource _cts = new();
 
         public WordsDataLoader(MagicWordsContent magicWordsContent, MessageService messageService)
         {
@@ -23,45 +20,43 @@ namespace App.MagicWords
             _messageService = messageService;
         }
         
-        public async UniTask InitializeAsync()
+        public async UniTask InitializeAsync(CancellationToken ctsToken)
         {
-            AddDisposable(new TokenDisposer(_cts));
-            
             while (true)
             {
                 try
                 {
-                    await LoadData();
+                    await LoadData(ctsToken);
                     Debug.Log("Words data has been loaded");
                     return;
                 }
                 catch (OperationCanceledException)
                 {
                     Debug.Log($"Data loading has been canceled.");
-                    return;
+                    throw;
                 }        
                 catch (Exception e)
                 {
                     Debug.LogWarning($"Data loading has failed. {e}");
-                    await WaitUntilRepeatIsCalled();
+                    await WaitUntilRepeatIsCalled(ctsToken);
                 }        
             }    
         }
 
-        private async UniTask LoadData()
+        private async UniTask LoadData(CancellationToken token)
         {
             Debug.Log("Dialogue data loading");
-            await UniTask.Delay(2000, cancellationToken: _cts.Token);
-            var json = await DataLoader.LoadJsonAsync(_magicWordsContent.DataUrl, _cts.Token);
+            await UniTask.Delay(2000, cancellationToken: token);
+            var json = await DataLoader.LoadJsonAsync(_magicWordsContent.DataUrl, token);
             Data = DataParser.Parse<WordsData>(json);
         }
 
-        private async UniTask WaitUntilRepeatIsCalled()
+        private async UniTask WaitUntilRepeatIsCalled(CancellationToken token)
         {
             var repeatIsCalled = false;
             ShowLoadingFailedMessage(onRepeatCalled: () => repeatIsCalled = true);
             await UniTask.WaitUntil(() => repeatIsCalled, 
-                cancellationToken: _cts.Token);
+                cancellationToken: token);
         }
 
         private void ShowLoadingFailedMessage(Action onRepeatCalled)
