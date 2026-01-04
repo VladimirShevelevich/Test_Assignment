@@ -16,3 +16,4 @@ MonoBehaviour:
   <MessagePrefab>k__BackingField: {fileID: 8508938002134289656, guid: 529ec2924256d92429b483f9fea620c9, type: 3}
   <AvatarDefaultTexture>k__BackingField: {fileID: 0}
   <LoadingPrefab>k__BackingField: {fileID: 7357411813777462089, guid: 56b0fd79f4564cc4abe5150e1cc2500b, type: 3}
+  <DialoguePrefab>k__BackingField: {fileID: 198911247710215398, guid: 236034a6f9e6e6c4f9444d36ed40cfbb, type: 3}
