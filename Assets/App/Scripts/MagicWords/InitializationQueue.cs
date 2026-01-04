@@ -15,6 +15,7 @@ namespace App.MagicWords
         private readonly DialogueDataLoader _dialogueDataLoader;
         private readonly AvatarsDataLoader _avatarsDataLoader;
         private readonly LoadingService _loadingService;
+        private readonly LifetimeScope _magicWordsScope;
 
         //Object dispose handling token
         private readonly CancellationTokenSource _cts = new();
@@ -22,12 +23,14 @@ namespace App.MagicWords
         public InitializationQueue(WordsDataLoader wordsDataLoader, 
             DialogueDataLoader dialogueDataLoader, 
             AvatarsDataLoader avatarsDataLoader,
-            LoadingService loadingService)
+            LoadingService loadingService,
+            LifetimeScope magicWordsScope)
         {
             _wordsDataLoader = wordsDataLoader;
             _dialogueDataLoader = dialogueDataLoader;
             _avatarsDataLoader = avatarsDataLoader;
             _loadingService = loadingService;
+            _magicWordsScope = magicWordsScope;
         }
         
         public void Initialize()
@@ -53,6 +56,13 @@ namespace App.MagicWords
             
             Debug.Log("Initialization's compelted");
             _loadingService.HideLoading();
+            CreateDialogueScope();
+        }
+
+        private void CreateDialogueScope()
+        {
+            var scope = _magicWordsScope.CreateChild<DialogueScope>();
+            scope.name = "DialogueScope";
         }
     }
 }
