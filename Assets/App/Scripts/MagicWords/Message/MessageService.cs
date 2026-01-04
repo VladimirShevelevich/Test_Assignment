@@ -1,11 +1,12 @@
 ﻿using System;
+using App.Tools;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using UniRx;
 
 namespace App.MagicWords
 {
-    public class MessageService
+    public class MessageService : BaseDisposable
     {
         private readonly Canvas _mainCanvas;
         private readonly MagicWordsContent _magicWordsContent;
@@ -26,6 +27,7 @@ namespace App.MagicWords
         private void CreateMessage(Action onRepeatCalled)
         {
             _message = Object.Instantiate(_magicWordsContent.MessagePrefab, _mainCanvas.transform);
+            AddDisposable(new GameObjectDisposer(_message.gameObject));
             _message.OnRepeatCalled.Subscribe(_ =>
             {
                 onRepeatCalled.Invoke();

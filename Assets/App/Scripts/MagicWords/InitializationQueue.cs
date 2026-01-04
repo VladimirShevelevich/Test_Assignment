@@ -14,7 +14,7 @@ namespace App.MagicWords
         
         public void Initialize()
         {
-            InitializeAsync();
+            InitializeAsync().Forget();
         }
 
         private async UniTaskVoid InitializeAsync()
