@@ -12,14 +12,16 @@ namespace App.MagicWords
     {
         private readonly WordsDataLoader _wordsDataLoader;
         private readonly DialogueDataLoader _dialogueDataLoader;
+        private readonly AvatarsDataLoader _avatarsDataLoader;
 
         //Object dispose handling token
         private readonly CancellationTokenSource _cts = new();
         
-        public InitializationQueue(WordsDataLoader wordsDataLoader, DialogueDataLoader dialogueDataLoader)
+        public InitializationQueue(WordsDataLoader wordsDataLoader, DialogueDataLoader dialogueDataLoader, AvatarsDataLoader avatarsDataLoader)
         {
             _wordsDataLoader = wordsDataLoader;
             _dialogueDataLoader = dialogueDataLoader;
+            _avatarsDataLoader = avatarsDataLoader;
         }
         
         public void Initialize()
@@ -34,11 +36,14 @@ namespace App.MagicWords
             {
                 await _wordsDataLoader.InitializeAsync(_cts.Token);
                 _dialogueDataLoader.Initialize();
+                await _avatarsDataLoader.InitializeAsync(_cts.Token);
             }
             catch (OperationCanceledException)
             {
                 Debug.Log("Initialization has been canceled");
             }
+            
+            Debug.Log("Initialization's compelted");
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading;
-using App.Scripts.Tools;
-using App.Tools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -30,12 +28,7 @@ namespace App.MagicWords
                     Debug.Log("Words data has been loaded");
                     return;
                 }
-                catch (OperationCanceledException)
-                {
-                    Debug.Log($"Data loading has been canceled.");
-                    throw;
-                }        
-                catch (Exception e)
+                catch (Exception e) when (e is not OperationCanceledException)
                 {
                     Debug.LogWarning($"Data loading has failed. {e}");
                     await WaitUntilRepeatIsCalled(ctsToken);
@@ -46,7 +39,6 @@ namespace App.MagicWords
         private async UniTask LoadData(CancellationToken token)
         {
             Debug.Log("Dialogue data loading");
-            await UniTask.Delay(2000, cancellationToken: token);
             var json = await DataLoader.LoadJsonAsync(_magicWordsContent.DataUrl, token);
             Data = DataParser.Parse<WordsData>(json);
         }
