@@ -13,8 +13,8 @@ namespace App.MagicWords
         public Dialogue(DialoguePresenter presenter, DialogueView view)
         {
             _presenter = presenter;
-            AddDisposable(presenter);         
-            AddDisposable(new GameObjectDisposer(view.gameObject));         
+            LinkDisposable(presenter);         
+            LinkDisposable(new GameObjectDisposer(view.gameObject));         
         }
 
         public void StartDialogue()

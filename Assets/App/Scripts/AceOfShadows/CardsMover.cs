@@ -31,7 +31,7 @@ namespace App.AceOfShadows
             _firstDeck = _cardsService.Decks[0];
             _secondDeck = _cardsService.Decks[1];
             
-            AddDisposable(_secondDeck.CardsAmount.Subscribe(OnSecondDeckAmountChanged));
+            LinkDisposable(_secondDeck.CardsAmount.Subscribe(OnSecondDeckAmountChanged));
             StartMovingRoutineAsync();
         }
         
@@ -45,7 +45,7 @@ namespace App.AceOfShadows
         {
             //using cancellationToken to handle the task disposing
             var tokenSource = new CancellationTokenSource();
-            AddDisposable(new TokenDisposer(tokenSource));
+            LinkDisposable(new TokenDisposer(tokenSource));
             
             while (_firstDeck.CardsAmount.Value > 0)
             {

@@ -30,7 +30,7 @@ namespace App.MagicWords
         
         public void Initialize()
         {
-            AddDisposable(new TokenDisposer(lifetimeCts));
+            LinkDisposable(new TokenDisposer(lifetimeCts));
             InitializeAsync().Forget();
         }
 

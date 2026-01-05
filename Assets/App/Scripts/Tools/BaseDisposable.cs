@@ -7,7 +7,7 @@ namespace App.Tools
     {
         private CompositeDisposable _compositeDisposable;
 
-        protected void AddDisposable(IDisposable disposable)
+        protected void LinkDisposable(IDisposable disposable)
         {
             _compositeDisposable ??= new CompositeDisposable();
             _compositeDisposable.Add(disposable);

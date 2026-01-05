@@ -15,7 +15,7 @@ namespace App.MagicWords
         public void Initialize()
         {
             var dialogue = _dialogueFactory.Create();
-            AddDisposable(dialogue);
+            LinkDisposable(dialogue);
             dialogue.StartDialogue();
         }
     }

@@ -27,7 +27,7 @@ namespace App.MagicWords
         private void CreateMessage(Action onRepeatCalled)
         {
             _message = Object.Instantiate(_magicWordsContent.MessagePrefab, _mainCanvas.transform);
-            AddDisposable(new GameObjectDisposer(_message.gameObject));
+            LinkDisposable(new GameObjectDisposer(_message.gameObject));
             _message.OnRepeatCalled.Subscribe(_ =>
             {
                 onRepeatCalled.Invoke();

@@ -28,7 +28,7 @@ namespace App.AceOfShadows
             Decks.Add(_deckFactory.CreateDeck(0, _cardsContent.InitialCardsAmount));
             Decks.Add(_deckFactory.CreateDeck(1, 0));
             foreach (var deck in Decks) 
-                AddDisposable(new GameObjectDisposer(deck.gameObject));
+                LinkDisposable(new GameObjectDisposer(deck.gameObject));
         }
     }
 }

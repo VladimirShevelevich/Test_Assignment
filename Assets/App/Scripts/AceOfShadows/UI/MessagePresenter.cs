@@ -21,7 +21,7 @@ namespace App.AceOfShadows
 
         public void Initialize()
         {
-            AddDisposable(_cardsMover.OnMovingComplete.Subscribe(_ => OnMovingComplete()));
+            LinkDisposable(_cardsMover.OnMovingComplete.Subscribe(_ => OnMovingComplete()));
         }
 
         private void OnMovingComplete()
@@ -32,7 +32,7 @@ namespace App.AceOfShadows
         private void ShowMessage()
         {
             var message = Object.Instantiate(_cardsContent.MessagePrefab, _canvas.transform);
-            AddDisposable(new GameObjectDisposer(message));
+            LinkDisposable(new GameObjectDisposer(message));
         }
     }
 }

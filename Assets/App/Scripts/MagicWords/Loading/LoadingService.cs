@@ -28,7 +28,7 @@ namespace App.MagicWords.Loading
         private void CreateLoadingGo()
         {
             _loadingGo = Object.Instantiate(_magicWordsContent.LoadingPrefab);
-            AddDisposable(new GameObjectDisposer(_loadingGo));
+            LinkDisposable(new GameObjectDisposer(_loadingGo));
         }
     }
 }
