@@ -18,3 +18,5 @@ MonoBehaviour:
   <DialoguePrefab>k__BackingField: {fileID: 198911247710215398, guid: 236034a6f9e6e6c4f9444d36ed40cfbb, type: 3}
   <DialogueLineLeft>k__BackingField: {fileID: 9015652699855870246, guid: 3c81d32bc1bb56e43bb5b53c8bc3b024, type: 3}
   <DialogueLineRight>k__BackingField: {fileID: 1882731537209636772, guid: 699b7f6370d60b8418f6243a5e1805b2, type: 3}
+  <MaxLinesCount>k__BackingField: 4
+  <DialogueDisplayInterval>k__BackingField: 2

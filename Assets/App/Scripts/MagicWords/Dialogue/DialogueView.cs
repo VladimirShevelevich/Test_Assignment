@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using App.Scripts.MagicWords;
 using UnityEngine;
 using VContainer;
@@ -10,21 +11,16 @@ namespace App.MagicWords
         private MagicWordsContent _content;
         private AvatarsDataLoader _avatarsDataLoader;
 
+        private List<GameObject> _lines = new();
+
         [Inject]
         public void Construct(MagicWordsContent magicWordsContent)
         {
             _content = magicWordsContent;
         }
         
-        public void DisplayLine(DialogueData dialogueData)
+        public void DisplayLine(DialogueData dialogueData, AvatarData avatarData)
         {
-            var avatarData = _content.Avatars.FirstOrDefault(x => x.Name == dialogueData.name);
-            if (avatarData == null)
-            {
-                Debug.LogWarning($"Avatar data by name {dialogueData.name} hasn't been found");
-                return;
-            }
-            
             CreateLine(dialogueData, avatarData);
         }
 
@@ -41,6 +37,20 @@ namespace App.MagicWords
                 line.SetAvatarSprite(avatarData.Sprite);
                 line.SetPosition(avatarData.Position);
             }
+            
+            _lines.Add(line.gameObject);
+
+            if (_lines.Count > _content.MaxLinesCount)
+            {
+                DestroyLastLine();
+            }
+        }
+
+        private void DestroyLastLine()
+        {
+            var lineToDestroy = _lines[0];
+            _lines.Remove(lineToDestroy);
+            Destroy(lineToDestroy);
         }
     }
 }

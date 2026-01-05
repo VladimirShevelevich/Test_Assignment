@@ -13,6 +13,8 @@ namespace App.MagicWords
         [field: SerializeField] public DialogueView DialoguePrefab { get; private set; }
         [field: SerializeField] public DialogueLine DialogueLineLeft { get; private set; }
         [field: SerializeField] public DialogueLine DialogueLineRight { get; private set; }
+        [field: SerializeField] public int MaxLinesCount { get; private set; }
+        [field: SerializeField] public float DialogueDisplayInterval { get; private set; }
         
         public List<DialogueData> Dialogues { get; set; }
         public List<AvatarData> Avatars { get; set; }
