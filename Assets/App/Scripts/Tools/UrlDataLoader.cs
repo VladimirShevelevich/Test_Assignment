@@ -4,9 +4,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace App.MagicWords
+namespace App.Tools
 {
-    public static class DataLoader
+    public static class UrlDataLoader
     {
         public static async UniTask<string> LoadJsonAsync(string url, CancellationToken token)
         {

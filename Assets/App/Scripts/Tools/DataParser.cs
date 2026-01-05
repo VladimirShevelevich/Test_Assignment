@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace App.MagicWords
+namespace App.Tools
 {
     public static class DataParser
     {

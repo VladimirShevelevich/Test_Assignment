@@ -12,9 +12,8 @@ namespace App.MagicWords
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_content);
-            builder.Register<WordsDataLoader>(Lifetime.Scoped);
-            builder.Register<DialogueDataLoader>(Lifetime.Scoped);
-            builder.Register<AvatarsDataLoader>(Lifetime.Scoped);
+            builder.Register<RemoteContentLoader>(Lifetime.Scoped);
+            builder.Register<RemoteContentFetcher>(Lifetime.Scoped);
             builder.Register<MessageService>(Lifetime.Scoped);
             builder.Register<LoadingService>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>

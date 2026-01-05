@@ -7,18 +7,13 @@ namespace App.MagicWords
 {
     public class DialoguePresenter : BaseDisposable
     {
-        private readonly AvatarsDataLoader _avatarsDataLoader;
-        private readonly DialogueDataLoader _dialogueDataLoader;
-        private readonly Canvas _mainCanvas;
+        private readonly MagicWordsContent _content;
 
-        private readonly CancellationTokenSource _lifeTimeCts = new();
         private DialogueView _view;
 
-        public DialoguePresenter(AvatarsDataLoader avatarsDataLoader, DialogueDataLoader dialogueDataLoader, Canvas mainCanvas)
+        public DialoguePresenter(MagicWordsContent content)
         {
-            _avatarsDataLoader = avatarsDataLoader;
-            _dialogueDataLoader = dialogueDataLoader;
-            _mainCanvas = mainCanvas;
+            _content = content;
         }
 
         public void BindView(DialogueView view)
@@ -33,7 +28,7 @@ namespace App.MagicWords
 
         private void StartDisplayDialogueAsync()
         {
-            foreach (var dialogue in _dialogueDataLoader.Dialogues)
+            foreach (var dialogue in _content.Dialogues)
             {
                 _view.DisplayLine(dialogue);
             }

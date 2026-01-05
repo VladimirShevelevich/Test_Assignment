@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using App.Scripts.MagicWords;
+using App.Tools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -10,41 +11,34 @@ namespace App.MagicWords
 {
     public class AvatarsDataLoader
     {
-        public List<AvatarData> Datas { get; private set; } = new();
-        
-        private readonly WordsDataLoader _wordsDataLoader;
-        private readonly MagicWordsContent _wordsContent;
+        private readonly Texture2D _defaultAvatarTexture;
 
-        public AvatarsDataLoader(WordsDataLoader wordsDataLoader, MagicWordsContent wordsContent)
+        public AvatarsDataLoader(Texture2D defaultAvatarTexture)
         {
-            _wordsDataLoader = wordsDataLoader;
-            _wordsContent = wordsContent;
+            _defaultAvatarTexture = defaultAvatarTexture;
         }
         
-        public async UniTask InitializeAsync(CancellationToken ctsToken)
-        {
-            await LoadDataAsync(ctsToken);
-        }
-
-        private async UniTask LoadDataAsync(CancellationToken ctsToken)
+        public async UniTask<List<AvatarData>> LoadDataAsync(RemoteData remoteData, CancellationToken ctsToken)
         {
             Debug.Log("Avatars data loading");
-            var wordsData = _wordsDataLoader.Data;
-
-            var avatarLoadOperations = wordsData.avatars.Select(remoteData => 
+            List<AvatarData> datas = new();
+            
+            var avatarLoadOperations = remoteData.avatars.Select(remoteData => 
                 CreateAvatarData(remoteData, ctsToken)).ToList();
 
-            var datas = await UniTask.WhenAll(avatarLoadOperations);
-            foreach (var data in datas)
+            var loadedDatas = await UniTask.WhenAll(avatarLoadOperations);
+            foreach (var loadedData in loadedDatas)
             {
-                if (Datas.Any(x => x.Name == data.Name))
+                if (datas.Any(x => x.Name == loadedData.Name))
                 {
-                    Debug.LogWarning($"{data.Name} avatar data is duplicated");
+                    Debug.LogWarning($"{loadedData.Name} avatar data is duplicated");
                     continue;
                 }
 
-                Datas.Add(data);
+                datas.Add(loadedData);
             }
+
+            return datas;
         }
 
         private async UniTask<AvatarData> CreateAvatarData(RemoteData.Avatar remoteData, CancellationToken token)
@@ -56,8 +50,8 @@ namespace App.MagicWords
             }
             catch (Exception e) when (e is not OperationCanceledException)
             {
-                Debug.LogWarning($"Failed to load avatar {remoteData.name} texture. {e}");
-                texture = _wordsContent.AvatarDefaultTexture;
+                Debug.LogWarning($"Failed to load avatar {remoteData.name} texture. {e}. Using default ");
+                texture = _defaultAvatarTexture;
             }
 
             var sprite = CreateSprite(texture);
@@ -78,7 +72,7 @@ namespace App.MagicWords
 
         private async UniTask<Texture2D> LoadTexture(string url, CancellationToken token)
         {
-            return await DataLoader.LoadTextureAsync(url, token);
+            return await UrlDataLoader.LoadTextureAsync(url, token);
         }
     }
 

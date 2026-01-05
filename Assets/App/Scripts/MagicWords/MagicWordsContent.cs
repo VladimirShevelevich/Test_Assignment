@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using App.Scripts.MagicWords;
+using UnityEngine;
 
 namespace App.MagicWords
 {
@@ -11,5 +13,8 @@ namespace App.MagicWords
         [field: SerializeField] public GameObject LoadingPrefab { get; private set; }
         [field: SerializeField] public DialogueView DialoguePrefab { get; private set; }
         [field: SerializeField] public DialogueLine DialogueLinePrefab { get; private set; }
+        
+        public List<DialogueData> Dialogues { get; set; }
+        public List<AvatarData> Avatars { get; set; }
     }
 }

@@ -1,32 +1,29 @@
 ﻿using System;
 using System.Threading;
+using App.Tools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace App.MagicWords
 {
-    public class WordsDataLoader
+    public class RemoteContentLoader
     {
-        public RemoteData Data { get; private set; }
-        
-        private readonly MagicWordsContent _magicWordsContent;
         private readonly MessageService _messageService;
 
-        public WordsDataLoader(MagicWordsContent magicWordsContent, MessageService messageService)
+        public RemoteContentLoader(MessageService messageService)
         {
-            _magicWordsContent = magicWordsContent;
             _messageService = messageService;
         }
         
-        public async UniTask InitializeAsync(CancellationToken ctsToken)
+        public async UniTask<RemoteData> LoadDataAsync(string url, CancellationToken ctsToken)
         {
             while (true)
             {
                 try
                 {
-                    await LoadData(ctsToken);
-                    Debug.Log("Words data has been loaded");
-                    return;
+                    var data = await LoadDataAsyncInternal(url, ctsToken);
+                    Debug.Log("Remote data has been loaded");
+                    return data;
                 }
                 catch (Exception e) when (e is not OperationCanceledException)
                 {
@@ -34,13 +31,15 @@ namespace App.MagicWords
                     await WaitUntilRepeatIsCalled(ctsToken);
                 }        
             }    
-        }
 
-        private async UniTask LoadData(CancellationToken token)
+        }        
+        
+        private async UniTask<RemoteData> LoadDataAsyncInternal(string url, CancellationToken token)
         {
-            Debug.Log("Dialogue data loading");
-            var json = await DataLoader.LoadJsonAsync(_magicWordsContent.DataUrl, token);
-            Data = DataParser.Parse<RemoteData>(json);
+            Debug.Log("Remote data loading");
+            var json = await UrlDataLoader.LoadJsonAsync(url, token);
+            var data = DataParser.Parse<RemoteData>(json);
+            return data;
         }
 
         private async UniTask WaitUntilRepeatIsCalled(CancellationToken token)

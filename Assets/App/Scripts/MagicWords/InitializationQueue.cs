@@ -11,31 +11,26 @@ namespace App.MagicWords
 {
     public class InitializationQueue : BaseDisposable, IInitializable
     {
-        private readonly WordsDataLoader _wordsDataLoader;
-        private readonly DialogueDataLoader _dialogueDataLoader;
         private readonly AvatarsDataLoader _avatarsDataLoader;
+        private readonly RemoteContentFetcher _remoteContentFetcher;
         private readonly LoadingService _loadingService;
         private readonly LifetimeScope _magicWordsScope;
 
         //Object dispose handling token
-        private readonly CancellationTokenSource _cts = new();
+        private readonly CancellationTokenSource lifetimeCts = new();
         
-        public InitializationQueue(WordsDataLoader wordsDataLoader, 
-            DialogueDataLoader dialogueDataLoader, 
-            AvatarsDataLoader avatarsDataLoader,
+        public InitializationQueue(RemoteContentFetcher remoteContentFetcher,
             LoadingService loadingService,
             LifetimeScope magicWordsScope)
         {
-            _wordsDataLoader = wordsDataLoader;
-            _dialogueDataLoader = dialogueDataLoader;
-            _avatarsDataLoader = avatarsDataLoader;
+            _remoteContentFetcher = remoteContentFetcher;
             _loadingService = loadingService;
             _magicWordsScope = magicWordsScope;
         }
         
         public void Initialize()
         {
-            AddDisposable(new TokenDisposer(_cts));
+            AddDisposable(new TokenDisposer(lifetimeCts));
             InitializeAsync().Forget();
         }
 
@@ -45,9 +40,7 @@ namespace App.MagicWords
             
             try
             {
-                await _wordsDataLoader.InitializeAsync(_cts.Token);
-                _dialogueDataLoader.Initialize();
-                await _avatarsDataLoader.InitializeAsync(_cts.Token);
+                await _remoteContentFetcher.FetchAsync(lifetimeCts.Token);
             }
             catch (OperationCanceledException)
             {

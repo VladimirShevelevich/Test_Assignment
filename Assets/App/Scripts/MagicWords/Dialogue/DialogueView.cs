@@ -11,15 +11,15 @@ namespace App.MagicWords
         private AvatarsDataLoader _avatarsDataLoader;
 
         [Inject]
-        public void Construct(MagicWordsContent magicWordsContent, AvatarsDataLoader avatarsDataLoader)
+        public void Construct(MagicWordsContent magicWordsContent)
         {
             _content = magicWordsContent;
-            _avatarsDataLoader = avatarsDataLoader;
         }
         
         public void DisplayLine(DialogueData dialogueData)
         {
-            var avatarData = _avatarsDataLoader.Datas.FirstOrDefault(x => x.Name == dialogueData.name);
+            return;
+            var avatarData = _content.Avatars.FirstOrDefault(x => x.Name == dialogueData.name);
             if (avatarData == null)
             {
                 Debug.LogError("Avatar data is not found");
@@ -31,8 +31,8 @@ namespace App.MagicWords
 
         private void BuildLine(DialogueData dialogueData, AvatarData avatarData)
         {
-            var line = Instantiate(_content.DialogueLinePrefab, transform);
-            line.SetText(dialogueData.text).
+            var line = Instantiate(_content.DialogueLinePrefab, transform).
+                SetText(dialogueData.text).
                 SetName(dialogueData.name).
                 SetAvatarSprite(avatarData.Sprite).
                 SetPosition(avatarData.Position);
