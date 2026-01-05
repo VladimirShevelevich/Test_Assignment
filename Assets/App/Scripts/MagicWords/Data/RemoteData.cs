@@ -15,11 +15,5 @@ namespace App.MagicWords
             public string url { get; set; }
             public string position { get; set; }
         }
-
-        public class Dialogue
-        {
-            public string name { get; set; }
-            public string text { get; set; }
-        }
     }   
 }

@@ -30,7 +30,7 @@ namespace App.MagicWords
 
         private async UniTask FetchAvatarsDataAsync(RemoteData remoteData, CancellationToken lifetimeToken)
         {
-            var avatarDataLoader = new AvatarsDataLoader(_content.AvatarDefaultTexture);
+            var avatarDataLoader = new AvatarsDataLoader();
             _content.Avatars = await avatarDataLoader.LoadDataAsync(remoteData, lifetimeToken);
         }
     }

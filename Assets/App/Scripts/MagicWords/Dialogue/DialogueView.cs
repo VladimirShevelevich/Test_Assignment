@@ -18,24 +18,29 @@ namespace App.MagicWords
         
         public void DisplayLine(DialogueData dialogueData)
         {
-            return;
             var avatarData = _content.Avatars.FirstOrDefault(x => x.Name == dialogueData.name);
             if (avatarData == null)
             {
-                Debug.LogError("Avatar data is not found");
+                Debug.LogWarning($"Avatar data by name {dialogueData.name} hasn't been found");
                 return;
             }
             
-            BuildLine(dialogueData, avatarData);
+            CreateLine(dialogueData, avatarData);
         }
 
-        private void BuildLine(DialogueData dialogueData, AvatarData avatarData)
+        private void CreateLine(DialogueData dialogueData, AvatarData avatarData)
         {
-            var line = Instantiate(_content.DialogueLinePrefab, transform).
-                SetText(dialogueData.text).
-                SetName(dialogueData.name).
-                SetAvatarSprite(avatarData.Sprite).
-                SetPosition(avatarData.Position);
+            var prefab = avatarData == null || avatarData.Position == AvatarPosition.left ?
+                _content.DialogueLineLeft : 
+                _content.DialogueLineRight;
+            var line = Instantiate(prefab, transform);
+            line.SetText($"{dialogueData.name}: {dialogueData.text}");
+
+            if (avatarData != null)
+            {
+                line.SetAvatarSprite(avatarData.Sprite);
+                line.SetPosition(avatarData.Position);
+            }
         }
     }
 }

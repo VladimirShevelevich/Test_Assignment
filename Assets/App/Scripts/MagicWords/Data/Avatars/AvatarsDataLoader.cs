@@ -11,13 +11,6 @@ namespace App.MagicWords
 {
     public class AvatarsDataLoader
     {
-        private readonly Texture2D _defaultAvatarTexture;
-
-        public AvatarsDataLoader(Texture2D defaultAvatarTexture)
-        {
-            _defaultAvatarTexture = defaultAvatarTexture;
-        }
-        
         public async UniTask<List<AvatarData>> LoadDataAsync(RemoteData remoteData, CancellationToken ctsToken)
         {
             Debug.Log("Avatars data loading");
@@ -29,6 +22,9 @@ namespace App.MagicWords
             var loadedDatas = await UniTask.WhenAll(avatarLoadOperations);
             foreach (var loadedData in loadedDatas)
             {
+                if (loadedData == null)
+                    continue;
+                
                 if (datas.Any(x => x.Name == loadedData.Name))
                 {
                     Debug.LogWarning($"{loadedData.Name} avatar data is duplicated");
@@ -51,7 +47,7 @@ namespace App.MagicWords
             catch (Exception e) when (e is not OperationCanceledException)
             {
                 Debug.LogWarning($"Failed to load avatar {remoteData.name} texture. {e}. Using default ");
-                texture = _defaultAvatarTexture;
+                return null;
             }
 
             var sprite = CreateSprite(texture);
