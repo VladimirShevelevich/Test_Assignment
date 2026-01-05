@@ -45,9 +45,10 @@ namespace App.MagicWords
             catch (OperationCanceledException)
             {
                 Debug.Log("Initialization has been canceled");
+                return;
             }
             
-            Debug.Log("Initialization's compelted");
+            Debug.Log("Initialization has been completed");
             _loadingService.HideLoading();
             CreateDialogueScope();
         }
