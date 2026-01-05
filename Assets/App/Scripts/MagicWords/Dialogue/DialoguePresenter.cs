@@ -31,9 +31,12 @@ namespace App.MagicWords
             StartDisplayDialogueAsync();
         }
 
-        private async UniTaskVoid StartDisplayDialogueAsync()
+        private void StartDisplayDialogueAsync()
         {
-            
+            foreach (var dialogue in _dialogueDataLoader.Dialogues)
+            {
+                _view.DisplayLine(dialogue);
+            }
         }
     }
 }

@@ -47,7 +47,7 @@ namespace App.MagicWords
             }
         }
 
-        private async UniTask<AvatarData> CreateAvatarData(WordsData.Avatar remoteData, CancellationToken token)
+        private async UniTask<AvatarData> CreateAvatarData(RemoteData.Avatar remoteData, CancellationToken token)
         {
             Texture2D texture;
             try
@@ -60,10 +60,20 @@ namespace App.MagicWords
                 texture = _wordsContent.AvatarDefaultTexture;
             }
 
+            var sprite = CreateSprite(texture);
+            
             return new AvatarData(
                 name: remoteData.name,
-                texture: texture,
+                sprite: sprite,
                 position: remoteData.position == "right" ? AvatarPosition.right : AvatarPosition.left);
+        }
+
+        private static Sprite CreateSprite(Texture2D texture)
+        {
+            return Sprite.Create(
+                texture,
+                new Rect(0, 0, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f));
         }
 
         private async UniTask<Texture2D> LoadTexture(string url, CancellationToken token)

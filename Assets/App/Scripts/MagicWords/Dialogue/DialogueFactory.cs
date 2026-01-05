@@ -20,6 +20,7 @@ namespace App.MagicWords
         {
             var presenter = _objectResolver.Resolve<DialoguePresenter>();
             var view = CreateView();
+            _objectResolver.Inject(view);
             presenter.BindView(view);
             return new Dialogue(presenter, view);
         }

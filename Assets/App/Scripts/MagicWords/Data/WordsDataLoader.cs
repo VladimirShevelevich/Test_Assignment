@@ -7,7 +7,7 @@ namespace App.MagicWords
 {
     public class WordsDataLoader
     {
-        public WordsData Data { get; private set; }
+        public RemoteData Data { get; private set; }
         
         private readonly MagicWordsContent _magicWordsContent;
         private readonly MessageService _messageService;
@@ -40,7 +40,7 @@ namespace App.MagicWords
         {
             Debug.Log("Dialogue data loading");
             var json = await DataLoader.LoadJsonAsync(_magicWordsContent.DataUrl, token);
-            Data = DataParser.Parse<WordsData>(json);
+            Data = DataParser.Parse<RemoteData>(json);
         }
 
         private async UniTask WaitUntilRepeatIsCalled(CancellationToken token)

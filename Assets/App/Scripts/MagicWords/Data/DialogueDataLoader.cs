@@ -6,7 +6,7 @@ namespace App.MagicWords
 {
     public class DialogueDataLoader
     {
-        public List<WordsData.Dialogue> Dialogues { get; private set; }
+        public List<Dialogue> Dialogues { get; private set; }
         
         private readonly WordsDataLoader _wordsDataLoader;
 

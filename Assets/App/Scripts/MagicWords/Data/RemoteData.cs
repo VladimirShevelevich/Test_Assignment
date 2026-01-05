@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace App.MagicWords
 {
     [Serializable]
-    public class WordsData
+    public class RemoteData
     {
-        public List<Dialogue> dialogue { get; set; }
+        public List<DialogueData> dialogue { get; set; }
         public List<Avatar> avatars { get; set; }
     
         public class Avatar
