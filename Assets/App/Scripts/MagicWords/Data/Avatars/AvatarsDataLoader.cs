@@ -17,58 +17,82 @@ namespace App.MagicWords
             List<AvatarData> datas = new();
             
             var avatarLoadOperations = remoteData.avatars.Select(remoteData => 
-                CreateAvatarData(remoteData, ctsToken)).ToList();
+                LoadAvatarData(remoteData, ctsToken)).ToList();
 
             var loadedDatas = await UniTask.WhenAll(avatarLoadOperations);
             foreach (var loadedData in loadedDatas)
             {
-                if (loadedData == null)
-                    continue;
-                
                 if (datas.Any(x => x.Name == loadedData.Name))
                 {
-                    Debug.LogWarning($"{loadedData.Name} avatar data is duplicated");
-                    continue;
+                    Debug.LogWarning($"{loadedData.Name} avatar data is duplicated. The data's been overridden");
+                    var original = datas.First(x => x.Name == loadedData.Name);
+                    AvatarDataDuplicateHandler.HandleDuplicate(original, loadedData);
                 }
-
                 datas.Add(loadedData);
             }
 
             return datas;
         }
 
-        private async UniTask<AvatarData> CreateAvatarData(RemoteData.Avatar remoteData, CancellationToken token)
+        private async UniTask<AvatarData> LoadAvatarData(RemoteData.Avatar remoteData, CancellationToken token)
         {
-            Texture2D texture;
+            Texture2D texture = null;
             try
             {
-                texture = await LoadTexture(remoteData.url, token);
+                texture = await LoadTextureAsync(remoteData.url, token);
             }
             catch (Exception e) when (e is not OperationCanceledException)
             {
                 Debug.LogWarning($"Failed to load avatar {remoteData.name} texture. {e}. Using default ");
-                return null;
             }
 
-            var sprite = CreateSprite(texture);
-            
-            return new AvatarData(
-                name: remoteData.name,
-                sprite: sprite,
-                position: remoteData.position == "right" ? AvatarPosition.right : AvatarPosition.left);
+            Sprite sprite = null;
+            if (texture != null)
+            {
+                sprite = CreateSpriteFromTexture(texture);
+            }
+
+            var position = GetPosition(remoteData);
+
+            return new AvatarData
+            {
+                Name = remoteData.name,
+                Sprite = sprite,
+                Position = position
+            };
         }
 
-        private static Sprite CreateSprite(Texture2D texture)
+        private AvatarPosition GetPosition(RemoteData.Avatar remoteData)
+        {
+            AvatarPosition position;
+            switch (remoteData.position)
+            {
+                case "right":
+                    position = AvatarPosition.right;
+                    break;
+                case "left":
+                    position = AvatarPosition.left;
+                    break;
+                default:
+                    Debug.LogError($"Failed to parse avatar {remoteData.name} position. Using default");
+                    position = AvatarPosition.left;
+                    break;
+            }
+
+            return position;
+        }
+
+        private async UniTask<Texture2D> LoadTextureAsync(string url, CancellationToken token)
+        {
+            return await UrlDataLoader.LoadTextureAsync(url, token);
+        }
+
+        private static Sprite CreateSpriteFromTexture(Texture2D texture)
         {
             return Sprite.Create(
                 texture,
                 new Rect(0, 0, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f));
-        }
-
-        private async UniTask<Texture2D> LoadTexture(string url, CancellationToken token)
-        {
-            return await UrlDataLoader.LoadTextureAsync(url, token);
         }
     }
 
