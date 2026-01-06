@@ -10,7 +10,7 @@ namespace App.PhoenixFlame
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(builder);
+            builder.RegisterInstance(_content);
             builder.Register<FlameFactory>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>
             {

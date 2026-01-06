@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a528827097be434a8c04d367c2ced071, type: 3}
   m_Name: PhoenixFlameContent
   m_EditorClassIdentifier: 
-  <FlamePrefab>k__BackingField: {fileID: 0}
+  <FlamePrefab>k__BackingField: {fileID: 5277025028466889263, guid: 771579fe8769548458cd809128b72889, type: 3}
