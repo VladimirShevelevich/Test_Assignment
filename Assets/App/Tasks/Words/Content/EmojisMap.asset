@@ -12,6 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4405981c854dc4b9bb30a88d07a762, type: 3}
   m_Name: EmojisMap
   m_EditorClassIdentifier: 
-  _datas:
-  - Key: satisfied
-    Unicode: "\U0001F60C"
