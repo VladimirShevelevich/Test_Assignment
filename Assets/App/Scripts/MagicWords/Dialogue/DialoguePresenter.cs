@@ -11,12 +11,14 @@ namespace App.MagicWords
     public class DialoguePresenter : BaseDisposable
     {
         private readonly MagicWordsContent _content;
+        private readonly EmojiConverter _emojiConverter;
         private DialogueView _view;
         private readonly CancellationTokenSource _lifeTimeToken = new();
 
-        public DialoguePresenter(MagicWordsContent content)
+        public DialoguePresenter(MagicWordsContent content, EmojiConverter emojiConverter)
         {
             _content = content;
+            _emojiConverter = emojiConverter;
             LinkDisposable(new TokenDisposer(_lifeTimeToken));
         }
 
@@ -34,18 +36,28 @@ namespace App.MagicWords
         {
             foreach (var dialogue in _content.Dialogues)
             {            
-                var avatarData = _content.Avatars.FirstOrDefault(x => x.Name == dialogue.name);
-                if (avatarData == null) 
-                    Debug.LogWarning($"Avatar data by name {dialogue.name} hasn't been found");
-                
-                _view.DisplayLine(dialogue, avatarData);
-                
+                DisplayLine(dialogue);
                 await UniTask.Delay(TimeSpan.FromSeconds(_content.DialogueDisplayInterval));
                 
                 if (_lifeTimeToken.IsCancellationRequested)
                     return;
 
             }
+        }
+
+        private void DisplayLine(DialogueData dialogue)
+        {
+            var convertedDialogue = new DialogueData
+            {
+                name = dialogue.name,
+                text = _emojiConverter.ReplaceKeysWithEmojis(dialogue.text)
+            };
+                
+            var avatarData = _content.Avatars.FirstOrDefault(x => x.Name == convertedDialogue.name);
+            if (avatarData == null) 
+                Debug.LogWarning($"Avatar data by name {dialogue.name} hasn't been found");
+                
+            _view.DisplayLine(convertedDialogue, avatarData);
         }
     }
 }
