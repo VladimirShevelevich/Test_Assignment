@@ -13,6 +13,11 @@ namespace App.Tools
             _gameObject = gameObject;
         }
 
+        public GameObjectDisposer(MonoBehaviour monoBehaviour)
+        {
+            _gameObject = monoBehaviour.gameObject;
+        }
+
         public void Dispose()
         {
             if (_gameObject != null)

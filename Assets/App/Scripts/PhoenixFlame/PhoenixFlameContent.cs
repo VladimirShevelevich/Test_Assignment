@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using App.PhoenixFlame.UI;
+using UnityEngine;
 
 namespace App.PhoenixFlame
 {
@@ -6,5 +7,6 @@ namespace App.PhoenixFlame
     public class PhoenixFlameContent : ScriptableObject
     {
         [field: SerializeField] public FlameView FlamePrefab { get; private set; }
+        [field: SerializeField] public UiView UiView { get; private set; }
     }
 }
