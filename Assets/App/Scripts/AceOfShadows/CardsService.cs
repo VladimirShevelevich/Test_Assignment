@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using App.AceOfShadows.View;
 using App.Tools;
+using UniRx;
 using VContainer.Unity;
 
 namespace App.AceOfShadows
 {
     public class CardsService : BaseDisposable, IInitializable
     {
+        public IObservable<Unit> OnMovingComplete => _cardsMover.OnMovingComplete;
+        
         private readonly DeckFactory _deckFactory;
         private readonly CardsContent _cardsContent;
+        private CardsMover _cardsMover;
 
-        public List<DeckView> Decks { get; } = new();
+        private List<DeckView> Decks { get; } = new();
         
         public CardsService(DeckFactory deckFactory, CardsContent cardsContent)
         {
@@ -21,6 +26,13 @@ namespace App.AceOfShadows
         public void Initialize()
         {
             CreateDecks();
+            CreateMover();
+        }
+
+        private void CreateMover()
+        {
+            _cardsMover = new CardsMover(Decks, _cardsContent);
+            LinkDisposable(_cardsMover);
         }
 
         private void CreateDecks()

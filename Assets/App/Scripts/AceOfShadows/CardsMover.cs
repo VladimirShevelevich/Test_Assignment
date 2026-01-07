@@ -1,35 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using App.AceOfShadows.View;
 using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
 using UniRx;
-using VContainer.Unity;
 
 namespace App.AceOfShadows
 {
-    public class CardsMover : BaseDisposable, IInitializable
+    public class CardsMover : BaseDisposable
     {
         public IObservable<Unit> OnMovingComplete => _onMovingComplete;
         private readonly ReactiveCommand _onMovingComplete = new();
         
-        private readonly CardsService _cardsService;
         private readonly CardsContent _cardsContent;
         
-        private DeckView _firstDeck;
-        private DeckView _secondDeck;
+        private readonly DeckView _firstDeck;
+        private readonly DeckView _secondDeck;
 
-        public CardsMover(CardsService cardsService, CardsContent cardsContent)
+        public CardsMover(IReadOnlyList<DeckView> decks, CardsContent cardsContent)
         {
-            _cardsService = cardsService;
             _cardsContent = cardsContent;
-        }
-        
-        public void Initialize()
-        {
-            _firstDeck = _cardsService.Decks[0];
-            _secondDeck = _cardsService.Decks[1];
+            _firstDeck = decks[0];
+            _secondDeck = decks[1];
             
             LinkDisposable(_secondDeck.CardsAmount.Subscribe(OnSecondDeckAmountChanged));
             StartMovingRoutineAsync();

@@ -15,7 +15,6 @@ namespace App.AceOfShadows
             builder.UseEntryPoints(ep =>
             {
                 ep.Add<CardsService>().AsSelf();
-                ep.Add<CardsMover>().AsSelf();
                 ep.Add<MessagePresenter>();
             });
         }

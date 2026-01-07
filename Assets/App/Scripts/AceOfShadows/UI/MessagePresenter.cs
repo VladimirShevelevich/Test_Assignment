@@ -9,19 +9,19 @@ namespace App.AceOfShadows
     {
         private readonly Canvas _canvas;
         private readonly CardsContent _cardsContent;
-        private readonly CardsMover _cardsMover;
+        private readonly CardsService _cardsService;
 
-        public MessagePresenter(Canvas canvas, CardsContent cardsContent, CardsMover cardsMover)
+        public MessagePresenter(Canvas canvas, CardsContent cardsContent, CardsService cardsService)
         {
             _canvas = canvas;
             _cardsContent = cardsContent;
-            _cardsMover = cardsMover;
+            _cardsService = cardsService;
         }
 
 
         public void Initialize()
         {
-            LinkDisposable(_cardsMover.OnMovingComplete.Subscribe(_ => OnMovingComplete()));
+            LinkDisposable(_cardsService.OnMovingComplete.Subscribe(_ => OnMovingComplete()));
         }
 
         private void OnMovingComplete()

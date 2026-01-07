@@ -1,6 +1,8 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UniRx;
 using UnityEngine;
+using VContainer;
 
 namespace App.AceOfShadows.View
 {
@@ -8,11 +10,25 @@ namespace App.AceOfShadows.View
     {
         [SerializeField] private DeckView _deckView;
         [SerializeField] private TMP_Text _counterText;
+        private CardsService _cardsService;
 
+        [Inject]
+        public void Construct(CardsService cardsService)
+        {
+            _cardsService = cardsService;
+        }
+        
         private void Start()
         {
             _deckView.CardsAmount.Subscribe(OnCardAmountChanged).
                 AddTo(gameObject);
+            _cardsService.OnMovingComplete.Subscribe(_ => OnMovingComplete()).
+                AddTo(gameObject);
+        }
+
+        private void OnMovingComplete()
+        {
+            HideCounter();
         }
 
         private void OnCardAmountChanged(int amount)
@@ -23,6 +39,14 @@ namespace App.AceOfShadows.View
         private void UpdateCounter(int amount)
         {
             _counterText.text = amount > 0 ? amount.ToString() : "";
+            _counterText.transform.localScale = Vector3.zero;
+            _counterText.transform.DOScale(1, 0.25f).SetEase(Ease.Linear).
+                SetLink(gameObject);
+        }
+
+        private void HideCounter()
+        {
+            _counterText.gameObject.SetActive(false);
         }
     }
 }

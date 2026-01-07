@@ -1,6 +1,7 @@
 ﻿using App.AceOfShadows.View;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace App.AceOfShadows
 {
@@ -18,7 +19,7 @@ namespace App.AceOfShadows
         public DeckView CreateDeck(int deckIndex, int initialCardsAmount)
         {
             var deck = CreateDeck(deckIndex);
-            _objectResolver.Inject(deck);
+            _objectResolver.InjectGameObject(deck.gameObject);
             CreateCards(initialCardsAmount, deck);
             return deck;
         }
