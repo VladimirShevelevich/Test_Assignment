@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using App.PhoenixFlame.UI;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -14,7 +15,8 @@ namespace App.PhoenixFlame
             builder.Register<FlameFactory>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>
             {
-                ep.Add<FlameService>();
+                ep.Add<FlameService>().AsSelf();
+                ep.Add<UiPresenter>();
             });
         }
     }

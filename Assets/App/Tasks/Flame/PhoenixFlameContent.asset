@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PhoenixFlameContent
   m_EditorClassIdentifier: 
   <FlamePrefab>k__BackingField: {fileID: 5277025028466889263, guid: 771579fe8769548458cd809128b72889, type: 3}
+  <UiView>k__BackingField: {fileID: 2214050355995747286, guid: 83a7d54eac038cc4789334ffe237490b, type: 3}
