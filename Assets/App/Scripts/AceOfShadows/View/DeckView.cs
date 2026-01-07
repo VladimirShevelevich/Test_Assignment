@@ -54,7 +54,7 @@ namespace App.AceOfShadows.View
 
         private Vector3 GetNewCardPosition()
         {
-            return transform.position + Vector3.right * _cardsAmount.Value * _cardsContent.CardsGap;
+            return transform.position + Vector3.down * _cardsAmount.Value * _cardsContent.CardsGap;
         }
     }
 }
