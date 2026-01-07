@@ -18,6 +18,6 @@ MonoBehaviour:
   <LoadingPrefab>k__BackingField: {fileID: 7357411813777462089, guid: 56b0fd79f4564cc4abe5150e1cc2500b, type: 3}
   <DialoguePrefab>k__BackingField: {fileID: 198911247710215398, guid: 236034a6f9e6e6c4f9444d36ed40cfbb, type: 3}
   <DialogueLineLeft>k__BackingField: {fileID: 9015652699855870246, guid: 3c81d32bc1bb56e43bb5b53c8bc3b024, type: 3}
-  <DialogueLineRight>k__BackingField: {fileID: 1882731537209636772, guid: 699b7f6370d60b8418f6243a5e1805b2, type: 3}
-  <MaxLinesCount>k__BackingField: 4
+  <DialogueLineRight>k__BackingField: {fileID: 2845424470944222663, guid: 8c897098e6711ac4482127f2b57b269a, type: 3}
+  <MaxLinesCount>k__BackingField: 5
   <DialogueDisplayInterval>k__BackingField: 2

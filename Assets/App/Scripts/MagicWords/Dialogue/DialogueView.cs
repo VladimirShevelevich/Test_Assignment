@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using App.Scripts.MagicWords;
 using UnityEngine;
 using VContainer;
@@ -11,7 +10,7 @@ namespace App.MagicWords
         private MagicWordsContent _content;
         private AvatarsDataLoader _avatarsDataLoader;
 
-        private List<GameObject> _lines = new();
+        private readonly List<GameObject> _lines = new();
 
         [Inject]
         public void Construct(MagicWordsContent magicWordsContent)
@@ -30,12 +29,12 @@ namespace App.MagicWords
                 _content.DialogueLineLeft : 
                 _content.DialogueLineRight;
             var line = Instantiate(prefab, transform);
-            line.SetText($"{dialogueData.name}: {dialogueData.text}");
+            line.SetText(dialogueData.text);
 
             if (avatarData != null)
             {
                 line.SetAvatarSprite(avatarData.Sprite);
-                line.SetPosition(avatarData.Position);
+                line.SetName(avatarData.Name);
             }
             
             _lines.Add(line.gameObject);

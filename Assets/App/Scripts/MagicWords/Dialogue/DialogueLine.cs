@@ -7,14 +7,8 @@ namespace App.MagicWords
     public class DialogueLine : MonoBehaviour
     {
         [SerializeField] private TMP_Text _text;
+        [SerializeField] private TMP_Text _name;
         [SerializeField] private Image _avatarImage;
-
-        public void SetPosition(AvatarPosition position)
-        {
-            _text.alignment = position == AvatarPosition.right
-                ? TextAlignmentOptions.Right
-                : TextAlignmentOptions.Left;
-        }
 
         public void SetText(string text)
         {
@@ -25,6 +19,11 @@ namespace App.MagicWords
         {
             if (sprite != null)
                 _avatarImage.sprite = sprite;
+        }
+        
+        public void SetName(string name)
+        {
+            _name.text = name;
         }
     }
 }
