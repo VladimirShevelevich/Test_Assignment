@@ -10,6 +10,7 @@ namespace App.PhoenixFlame.UI
         private readonly PhoenixFlameContent _content;
         private readonly Canvas _uiCanvas;
         private readonly FlameService _flameService;
+        private UiView _view;
 
         public UiPresenter(PhoenixFlameContent content, Canvas uiCanvas, FlameService flameService)
         {
@@ -25,10 +26,10 @@ namespace App.PhoenixFlame.UI
 
         private void CreateView()
         {
-            var view = Object.Instantiate(_content.UiView, _uiCanvas.transform);
-            LinkDisposable(new GameObjectDisposer(view));
+            _view = Object.Instantiate(_content.UiView, _uiCanvas.transform);
+            LinkDisposable(new GameObjectDisposer(_view));
 
-            SubscribeOnButtonClick(view);
+            SubscribeOnButtonClick(_view);
         }
 
         private void SubscribeOnButtonClick(UiView view)
@@ -40,6 +41,7 @@ namespace App.PhoenixFlame.UI
         private void OnStartAnimationClick()
         {
             _flameService.StartAnimation();
+            _view.HideButton();
         }
     }
 }

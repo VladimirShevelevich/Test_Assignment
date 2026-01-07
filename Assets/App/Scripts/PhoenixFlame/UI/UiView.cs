@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,11 @@ namespace App.PhoenixFlame.UI
             {
                 _onStartAnimationClick?.Execute();
             }).AddTo(this);
+        }
+
+        public void HideButton()
+        {
+            _button.transform.DOScale(0, 0.1f).SetLink(gameObject);
         }
     }
 }
