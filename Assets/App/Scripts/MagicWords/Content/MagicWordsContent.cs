@@ -1,23 +1,18 @@
-﻿using System.Collections.Generic;
-using App.Scripts.MagicWords;
-using UnityEngine;
+﻿using UnityEngine;
+using VContainer;
 
 namespace App.MagicWords
 {
-    [CreateAssetMenu(fileName = "MagicWordsContent", menuName = "Content/MagicWords")]
+    [CreateAssetMenu(fileName = "MagicWordsContent", menuName = "Content/MagicWords/MagicWordsContent")]
     public class MagicWordsContent : ScriptableObject
     {
-        [field: SerializeField] public EmojisMap EmojisMap { get; private set; }
-        [field: SerializeField] public string DataUrl { get; private set; }
-        [field: SerializeField] public MessageView MessagePrefab { get; private set; }
-        [field: SerializeField] public GameObject LoadingPrefab { get; private set; }
-        [field: SerializeField] public DialogueView DialoguePrefab { get; private set; }
-        [field: SerializeField] public DialogueLine DialogueLineLeft { get; private set; }
-        [field: SerializeField] public DialogueLine DialogueLineRight { get; private set; }
-        [field: SerializeField] public int MaxLinesCount { get; private set; }
-        [field: SerializeField] public float DialogueDisplayInterval { get; private set; }
-        
-        public List<DialogueData> Dialogues { get; set; }
-        public List<AvatarData> Avatars { get; set; }
+        [SerializeField] private DialogueContent _dialogueContent;
+        [SerializeField] private DataLoadingContent _dataLoadingContent;
+
+        public void Register(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(_dialogueContent);
+            builder.RegisterInstance(_dataLoadingContent);
+        }
     }
 }

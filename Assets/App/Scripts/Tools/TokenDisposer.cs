@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace App.Scripts.Tools
+namespace App.Tools
 {
     public class TokenDisposer : IDisposable
     {

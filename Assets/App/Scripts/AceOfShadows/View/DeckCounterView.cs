@@ -39,6 +39,11 @@ namespace App.AceOfShadows
         private void UpdateCounter(int amount)
         {
             _counterText.text = amount > 0 ? amount.ToString() : "";
+            PlayValueChangeAnimation();
+        }
+
+        private void PlayValueChangeAnimation()
+        {
             _counterText.transform.localScale = Vector3.zero;
             _counterText.transform.DOScale(1, 0.25f).SetEase(Ease.Linear).
                 SetLink(gameObject);

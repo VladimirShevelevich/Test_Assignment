@@ -6,32 +6,34 @@ namespace App.MagicWords
 {
     public class RemoteContentFetcher
     {
-        private readonly MagicWordsContent _content;
         private readonly RemoteContentLoader _remoteContentLoader;
         private readonly MessageService _messageService;
+        private readonly DataLoadingContent _dataLoadingContent;
+        private readonly DialogueContent _dialogueContent;
 
-        public RemoteContentFetcher(MagicWordsContent content, RemoteContentLoader remoteContentLoader)
+        public RemoteContentFetcher(DataLoadingContent dataLoadingContent, DialogueContent dialogueContent, RemoteContentLoader remoteContentLoader)
         {
-            _content = content;
+            _dataLoadingContent = dataLoadingContent;
+            _dialogueContent = dialogueContent;
             _remoteContentLoader = remoteContentLoader;
         }
 
         public async UniTask FetchAsync(CancellationToken lifetimeToken)
         {
-            var remoteData = await _remoteContentLoader.LoadDataAsync(_content.DataUrl, lifetimeToken);
+            var remoteData = await _remoteContentLoader.LoadDataAsync(_dataLoadingContent.DataUrl, lifetimeToken);
             FetchDialogueData(remoteData);
             await FetchAvatarsDataAsync(remoteData, lifetimeToken);
         }
 
         private void FetchDialogueData(RemoteData remoteData)
         {
-            _content.Dialogues = remoteData.dialogue.ToList();
+            _dialogueContent.Dialogues = remoteData.dialogue.ToList();
         }
 
         private async UniTask FetchAvatarsDataAsync(RemoteData remoteData, CancellationToken lifetimeToken)
         {
             var avatarDataLoader = new AvatarsDataLoader();
-            _content.Avatars = await avatarDataLoader.LoadDataAsync(remoteData, lifetimeToken);
+            _dialogueContent.Avatars = await avatarDataLoader.LoadDataAsync(remoteData, lifetimeToken);
         }
     }
 }

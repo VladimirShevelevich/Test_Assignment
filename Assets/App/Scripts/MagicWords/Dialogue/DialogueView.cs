@@ -7,15 +7,15 @@ namespace App.MagicWords
 {
     public class DialogueView : MonoBehaviour
     {
-        private MagicWordsContent _content;
         private AvatarsDataLoader _avatarsDataLoader;
 
         private readonly List<GameObject> _lines = new();
+        private DialogueContent _dialogueContent;
 
         [Inject]
-        public void Construct(MagicWordsContent magicWordsContent)
+        public void Construct(DialogueContent dialogueContent)
         {
-            _content = magicWordsContent;
+            _dialogueContent = dialogueContent;
         }
         
         public void DisplayLine(DialogueData dialogueData, AvatarData avatarData)
@@ -26,8 +26,8 @@ namespace App.MagicWords
         private void CreateLine(DialogueData dialogueData, AvatarData avatarData)
         {
             var prefab = avatarData == null || avatarData.Position == AvatarPosition.left ?
-                _content.DialogueLineLeft : 
-                _content.DialogueLineRight;
+                _dialogueContent.DialogueLineLeft : 
+                _dialogueContent.DialogueLineRight;
             var line = Instantiate(prefab, transform);
             line.SetText(dialogueData.text);
 
@@ -39,7 +39,7 @@ namespace App.MagicWords
             
             _lines.Add(line.gameObject);
 
-            if (_lines.Count > _content.MaxLinesCount)
+            if (_lines.Count > _dialogueContent.MaxLinesCount)
             {
                 DestroyLastLine();
             }

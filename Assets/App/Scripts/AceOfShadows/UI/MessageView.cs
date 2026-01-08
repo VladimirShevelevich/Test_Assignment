@@ -7,10 +7,10 @@ namespace App.AceOfShadows
     {
         void Start()
         {
-            ShowAnimation();
+            ShowStartAnimation();
         }
 
-        private void ShowAnimation()
+        private void ShowStartAnimation()
         {
             transform.localScale = Vector3.zero;;
             transform.DOScale(1, 0.1f).SetLink(gameObject);

@@ -9,14 +9,14 @@ namespace App.MagicWords
     public class MessageService : BaseDisposable
     {
         private readonly Canvas _mainCanvas;
-        private readonly MagicWordsContent _magicWordsContent;
+        private readonly DataLoadingContent _dataLoadingContent;
 
         private MessageView _message;
 
-        public MessageService(Canvas mainCanvas, MagicWordsContent magicWordsContent)
+        public MessageService(Canvas mainCanvas, DataLoadingContent dataLoadingContent)
         {
             _mainCanvas = mainCanvas;
-            _magicWordsContent = magicWordsContent;
+            _dataLoadingContent = dataLoadingContent;
         }
         
         public void ShowLoadingFailedMessage(Action onRepeatCalled)
@@ -26,7 +26,7 @@ namespace App.MagicWords
 
         private void CreateMessage(Action onRepeatCalled)
         {
-            _message = Object.Instantiate(_magicWordsContent.MessagePrefab, _mainCanvas.transform);
+            _message = Object.Instantiate(_dataLoadingContent.LoadingErrorMessagePrefab, _mainCanvas.transform);
             LinkDisposable(new GameObjectDisposer(_message.gameObject));
             _message.OnRepeatCalled.Subscribe(_ =>
             {

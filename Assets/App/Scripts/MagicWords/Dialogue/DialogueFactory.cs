@@ -5,13 +5,13 @@ namespace App.MagicWords
 {
     public class DialogueFactory
     {
-        private readonly MagicWordsContent _magicWordsContent;
+        private readonly DialogueContent _dialogueContent;
         private readonly Canvas _mainCanvas;
         private readonly IObjectResolver _objectResolver;
 
-        public DialogueFactory(MagicWordsContent magicWordsContent, Canvas mainCanvas, IObjectResolver objectResolver)
+        public DialogueFactory(DialogueContent dialogueContent, Canvas mainCanvas, IObjectResolver objectResolver)
         {
-            _magicWordsContent = magicWordsContent;
+            _dialogueContent = dialogueContent;
             _mainCanvas = mainCanvas;
             _objectResolver = objectResolver;
         }
@@ -27,7 +27,7 @@ namespace App.MagicWords
 
         private DialogueView CreateView()
         {
-            return Object.Instantiate(_magicWordsContent.DialoguePrefab, _mainCanvas.transform);
+            return Object.Instantiate(_dialogueContent.DialoguePrefab, _mainCanvas.transform);
         }
     }
 }

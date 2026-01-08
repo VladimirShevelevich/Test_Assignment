@@ -11,7 +11,7 @@ namespace App.MagicWords
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_content);
+            _content.Register(builder);
             builder.Register<RemoteContentLoader>(Lifetime.Scoped);
             builder.Register<RemoteContentFetcher>(Lifetime.Scoped);
             builder.Register<MessageService>(Lifetime.Scoped);

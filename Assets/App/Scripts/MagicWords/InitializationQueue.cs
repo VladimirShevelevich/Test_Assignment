@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using App.MagicWords.Loading;
-using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

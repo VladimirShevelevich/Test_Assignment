@@ -10,8 +10,8 @@ namespace App.AceOfShadows
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<DeckFactory>(Lifetime.Scoped);
             _aceOfShadowsContent.Register(builder);
+            builder.Register<DeckFactory>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>
             {
                 ep.Add<CardsService>().AsSelf();

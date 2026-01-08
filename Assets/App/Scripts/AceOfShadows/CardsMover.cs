@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
 using UniRx;
@@ -10,6 +9,9 @@ namespace App.AceOfShadows
 {
     public class CardsMover : BaseDisposable
     {
+        /// <summary>
+        /// All cards have been moved
+        /// </summary>
         public IObservable<Unit> OnMovingComplete => _onMovingComplete;
         private readonly ReactiveCommand _onMovingComplete = new();
         
@@ -26,13 +28,18 @@ namespace App.AceOfShadows
             _firstDeck = decks[0];
             _secondDeck = decks[1];
             
-            LinkDisposable(_secondDeck.CardsAmount.Subscribe(OnSecondDeckAmountChanged));
+            SubscribeOnSecondDeckAmountChange();
             StartMovingRoutineAsync();
         }
-        
-        private void OnSecondDeckAmountChanged(int amount)
+
+        private void SubscribeOnSecondDeckAmountChange()
         {
-            if (amount >= _totalCardsAmount)
+            LinkDisposable(_secondDeck.CardsAmount.Subscribe(OnSecondDeckAmountChanged));
+        }
+
+        private void OnSecondDeckAmountChanged(int currentAmount)
+        {
+            if (currentAmount >= _totalCardsAmount)
                 _onMovingComplete?.Execute();
         }
 
@@ -44,13 +51,18 @@ namespace App.AceOfShadows
             
             while (_firstDeck.CardsAmount.Value > 0)
             {
-                var cardToMove = _firstDeck.PopCard();
-                _secondDeck.PullCard(cardToMove, _movementContent.MoveDuration);
+                MoveCard();
                 await UniTask.Delay(TimeSpan.FromSeconds(_movementContent.MoveTimeInterval));
                 
                 if (tokenSource.IsCancellationRequested)
                     return;
             }
+        }
+
+        private void MoveCard()
+        {
+            var cardToMove = _firstDeck.PopCard();
+            _secondDeck.PullCard(cardToMove, _movementContent.MoveDuration);
         }
     }
 }

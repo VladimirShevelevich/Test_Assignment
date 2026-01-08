@@ -9,7 +9,6 @@ namespace App.AceOfShadows
     {
         private readonly Canvas _canvas;
         private readonly UiContent _uiContent;
-        private readonly UiContent _magicWordsContent;
         private readonly CardsService _cardsService;
 
         public MessagePresenter(Canvas canvas, UiContent uiContent, CardsService cardsService)

@@ -12,12 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54638296b6fd453ebecab61b705e392f, type: 3}
   m_Name: MagicWordsContent
   m_EditorClassIdentifier: 
-  <EmojisMap>k__BackingField: {fileID: 11400000, guid: 26d0b8f2d5f56b54c8b85b23e56468e9, type: 2}
-  <DataUrl>k__BackingField: https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords
-  <MessagePrefab>k__BackingField: {fileID: 8508938002134289656, guid: 529ec2924256d92429b483f9fea620c9, type: 3}
-  <LoadingPrefab>k__BackingField: {fileID: 7357411813777462089, guid: 56b0fd79f4564cc4abe5150e1cc2500b, type: 3}
-  <DialoguePrefab>k__BackingField: {fileID: 198911247710215398, guid: 236034a6f9e6e6c4f9444d36ed40cfbb, type: 3}
-  <DialogueLineLeft>k__BackingField: {fileID: 9015652699855870246, guid: 3c81d32bc1bb56e43bb5b53c8bc3b024, type: 3}
-  <DialogueLineRight>k__BackingField: {fileID: 2845424470944222663, guid: 8c897098e6711ac4482127f2b57b269a, type: 3}
-  <MaxLinesCount>k__BackingField: 5
-  <DialogueDisplayInterval>k__BackingField: 2
+  _dialogueContent: {fileID: 11400000, guid: 87114e643af387548bd2dff2918a738d, type: 2}
+  _dataLoadingContent: {fileID: 11400000, guid: a858728e5d0a7d84ebf17bdc72c8cd15, type: 2}
