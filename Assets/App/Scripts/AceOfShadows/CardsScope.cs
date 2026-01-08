@@ -6,12 +6,12 @@ namespace App.AceOfShadows
 {
     public class CardsScope : LifetimeScope
     {
-        [SerializeField] private CardsContent _cardsContent;
+        [SerializeField] private AceOfShadowsContent _aceOfShadowsContent;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<DeckFactory>(Lifetime.Scoped);
-            builder.RegisterInstance(_cardsContent);
+            _aceOfShadowsContent.Register(builder);
             builder.UseEntryPoints(ep =>
             {
                 ep.Add<CardsService>().AsSelf();

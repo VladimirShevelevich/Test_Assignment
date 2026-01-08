@@ -1,5 +1,4 @@
-﻿using App.AceOfShadows.View;
-using UnityEngine;
+﻿using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -7,12 +6,12 @@ namespace App.AceOfShadows
 {
     public class DeckFactory
     {
-        private readonly CardsContent _cardsContent;
+        private readonly DecksContent _decksContent;
         private readonly IObjectResolver _objectResolver;
 
-        public DeckFactory(CardsContent cardsContent, IObjectResolver objectResolver)
+        public DeckFactory(DecksContent decksContent, IObjectResolver objectResolver)
         {
-            _cardsContent = cardsContent;
+            _decksContent = decksContent;
             _objectResolver = objectResolver;
         }
         
@@ -26,9 +25,9 @@ namespace App.AceOfShadows
 
         private DeckView CreateDeck(int deckIndex)
         {
-            var position = _cardsContent.DecksPositions[deckIndex];
-            var deck = Object.Instantiate(_cardsContent.DeckPrefab, position, Quaternion.identity);
-            deck.SetDeckOrderIndex(deckIndex * _cardsContent.InitialCardsAmount);
+            var position = _decksContent.DecksPositions[deckIndex];
+            var deck = Object.Instantiate(_decksContent.DeckPrefab, position, Quaternion.identity);
+            deck.SetDeckOrderIndex(deckIndex * _decksContent.TotalCardsAmount);
             return deck;
         }
 
@@ -36,7 +35,7 @@ namespace App.AceOfShadows
         {
             for (var i = 0; i < initialCardAmount; i++)
             {
-                var randomSprite = _cardsContent.CardsSprites[Random.Range(0, _cardsContent.CardsSprites.Length)];
+                var randomSprite = _decksContent.CardsSprites[Random.Range(0, _decksContent.CardsSprites.Length)];
                 var card = CreateCard(randomSprite);
                 deck.AddCard(card);
             }
@@ -44,7 +43,7 @@ namespace App.AceOfShadows
 
         private CardView CreateCard(Sprite sprite)
         {
-            var view = Object.Instantiate(_cardsContent.CardPrefab);
+            var view = Object.Instantiate(_decksContent.CardPrefab);
             view.SetSprite(sprite);
             return view;
         }

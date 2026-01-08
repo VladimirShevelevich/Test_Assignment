@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using App.AceOfShadows.View;
 using App.Scripts.Tools;
 using App.Tools;
 using Cysharp.Threading.Tasks;
@@ -14,14 +13,16 @@ namespace App.AceOfShadows
         public IObservable<Unit> OnMovingComplete => _onMovingComplete;
         private readonly ReactiveCommand _onMovingComplete = new();
         
-        private readonly CardsContent _cardsContent;
-        
+        private readonly MovementContent _movementContent;
+        private readonly int _totalCardsAmount;
+
         private readonly DeckView _firstDeck;
         private readonly DeckView _secondDeck;
 
-        public CardsMover(IReadOnlyList<DeckView> decks, CardsContent cardsContent)
+        public CardsMover(IReadOnlyList<DeckView> decks, MovementContent movementContent, int totalCardsAmount)
         {
-            _cardsContent = cardsContent;
+            _movementContent = movementContent;
+            _totalCardsAmount = totalCardsAmount;
             _firstDeck = decks[0];
             _secondDeck = decks[1];
             
@@ -31,7 +32,7 @@ namespace App.AceOfShadows
         
         private void OnSecondDeckAmountChanged(int amount)
         {
-            if (amount >= _cardsContent.InitialCardsAmount)
+            if (amount >= _totalCardsAmount)
                 _onMovingComplete?.Execute();
         }
 
@@ -44,8 +45,8 @@ namespace App.AceOfShadows
             while (_firstDeck.CardsAmount.Value > 0)
             {
                 var cardToMove = _firstDeck.PopCard();
-                _secondDeck.PullCard(cardToMove);
-                await UniTask.Delay(TimeSpan.FromSeconds(_cardsContent.MoveTimeInterval));
+                _secondDeck.PullCard(cardToMove, _movementContent.MoveDuration);
+                await UniTask.Delay(TimeSpan.FromSeconds(_movementContent.MoveTimeInterval));
                 
                 if (tokenSource.IsCancellationRequested)
                     return;

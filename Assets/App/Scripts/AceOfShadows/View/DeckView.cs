@@ -3,20 +3,20 @@ using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace App.AceOfShadows.View
+namespace App.AceOfShadows
 {
     public class DeckView : MonoBehaviour
     {
         public IReadOnlyReactiveProperty<int> CardsAmount => _cardsAmount;
         private readonly ReactiveProperty<int> _cardsAmount = new();
         
-        private CardsContent _cardsContent;
+        private DecksContent _decksContent;
         private int _deckOrderIndex;
 
         [Inject]
-        public void Construct(CardsContent cardsContent)
+        public void Construct(DecksContent decksContent)
         {
-            _cardsContent = cardsContent;
+            _decksContent = decksContent;
         }
 
         public void SetDeckOrderIndex(int orderIndex) =>
@@ -38,12 +38,12 @@ namespace App.AceOfShadows.View
             return cardTransform.GetComponent<CardView>();
         }
         
-        public void PullCard(CardView cardView)
+        public void PullCard(CardView cardView, float moveDuration)
         {
             cardView.transform.SetParent(transform);
             cardView.SetOrderIndex(_deckOrderIndex + _cardsAmount.Value);
             var position = GetNewCardPosition();
-            cardView.transform.DOMove(position, _cardsContent.MoveDuration).SetLink(gameObject).OnComplete(() =>
+            cardView.transform.DOMove(position, moveDuration).SetLink(gameObject).OnComplete(() =>
                 OnCardPullComplete(cardView));
         }
 
@@ -54,7 +54,7 @@ namespace App.AceOfShadows.View
 
         private Vector3 GetNewCardPosition()
         {
-            return transform.position + Vector3.down * _cardsAmount.Value * _cardsContent.CardsGap;
+            return transform.position + Vector3.down * _cardsAmount.Value * _decksContent.CardsGap;
         }
     }
 }

@@ -8,13 +8,14 @@ namespace App.AceOfShadows
     public class MessagePresenter : BaseDisposable, IInitializable
     {
         private readonly Canvas _canvas;
-        private readonly CardsContent _cardsContent;
+        private readonly UiContent _uiContent;
+        private readonly UiContent _magicWordsContent;
         private readonly CardsService _cardsService;
 
-        public MessagePresenter(Canvas canvas, CardsContent cardsContent, CardsService cardsService)
+        public MessagePresenter(Canvas canvas, UiContent uiContent, CardsService cardsService)
         {
             _canvas = canvas;
-            _cardsContent = cardsContent;
+            _uiContent = uiContent;
             _cardsService = cardsService;
         }
 
@@ -31,7 +32,7 @@ namespace App.AceOfShadows
 
         private void ShowMessage()
         {
-            var message = Object.Instantiate(_cardsContent.MessagePrefab, _canvas.transform);
+            var message = Object.Instantiate(_uiContent.MessagePrefab, _canvas.transform);
             LinkDisposable(new GameObjectDisposer(message));
         }
     }

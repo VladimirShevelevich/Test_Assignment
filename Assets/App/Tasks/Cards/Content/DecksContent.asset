@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2856bcbd6d844dd39a2939eda0672ad8, type: 3}
-  m_Name: CardsContent
-  m_EditorClassIdentifier: 
+  m_Script: {fileID: 11500000, guid: bb225bfde26d4c0e820dbeae9a5b840f, type: 3}
+  m_Name: DecksContent
+  m_EditorClassIdentifier: Cards::App.AceOfShadows.DecksContent
   <DeckPrefab>k__BackingField: {fileID: 7081028087267079573, guid: e075568ed909c8049a43701fbe7da37b, type: 3}
   <CardPrefab>k__BackingField: {fileID: 108323868576951243, guid: 92ed121e1092b2b47b16d1c863cb5a6b, type: 3}
   <DecksPositions>k__BackingField:
-  - {x: 0.25, y: 0.9, z: 0}
-  - {x: -0.25, y: 0.9, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   <CardsSprites>k__BackingField:
   - {fileID: -3502424558361539742, guid: 5f0074f1c36da4a71bf1a5e1528a2f35, type: 3}
   - {fileID: 3965424811811440438, guid: 5f0074f1c36da4a71bf1a5e1528a2f35, type: 3}
@@ -75,8 +75,5 @@ MonoBehaviour:
   - {fileID: 9136615021833677593, guid: 5f0074f1c36da4a71bf1a5e1528a2f35, type: 3}
   - {fileID: -638057480, guid: 5f0074f1c36da4a71bf1a5e1528a2f35, type: 3}
   - {fileID: 8297528716688777880, guid: 5f0074f1c36da4a71bf1a5e1528a2f35, type: 3}
-  <CardsGap>k__BackingField: 0.015
-  <MoveDuration>k__BackingField: 0.5
-  <MoveTimeInterval>k__BackingField: 1
-  <InitialCardsAmount>k__BackingField: 144
-  <MessagePrefab>k__BackingField: {fileID: 6602124118375942655, guid: b1a85c769e025d747baad5f969b3abf0, type: 3}
+  <CardsGap>k__BackingField: 0
+  <TotalCardsAmount>k__BackingField: 0

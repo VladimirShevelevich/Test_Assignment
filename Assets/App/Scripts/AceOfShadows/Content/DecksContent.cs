@@ -1,0 +1,15 @@
+﻿using UnityEngine;
+
+namespace App.AceOfShadows
+{
+    [CreateAssetMenu(fileName = "DecksContent", menuName = "Content/AceOfShadows/Decks")]
+    public class DecksContent : ScriptableObject
+    {
+        [field: SerializeField] public DeckView DeckPrefab { get; private set; }
+        [field: SerializeField] public CardView CardPrefab { get; private set; }
+        [field: SerializeField] public Vector3[] DecksPositions { get; private set; }
+        [field: SerializeField] public Sprite[] CardsSprites { get; private set; }
+        [field: SerializeField] public float CardsGap { get; private set; }
+        [field: SerializeField] public int TotalCardsAmount { get; private set; }
+    }
+}

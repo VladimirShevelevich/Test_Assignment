@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8410db0ce79476987306c537c3c8c02, type: 3}
+  m_Name: UiContent
+  m_EditorClassIdentifier: Cards::App.AceOfShadows.UiContent
+  <MessagePrefab>k__BackingField: {fileID: 6602124118375942655, guid: b1a85c769e025d747baad5f969b3abf0, type: 3}

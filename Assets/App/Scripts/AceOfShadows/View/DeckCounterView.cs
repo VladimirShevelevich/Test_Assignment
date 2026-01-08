@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 using VContainer;
 
-namespace App.AceOfShadows.View
+namespace App.AceOfShadows
 {
     public class DeckCounterView : MonoBehaviour
     {
