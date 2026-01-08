@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LoadingAnimationView : MonoBehaviour
 {
+    [SerializeField] private Transform _image;
+    
     void Start()
     {
         StartAnimation();
@@ -10,7 +12,7 @@ public class LoadingAnimationView : MonoBehaviour
 
     private void StartAnimation()
     {
-        transform
+        _image
             .DORotate(new Vector3(0, 0, -360), 3f, RotateMode.FastBeyond360)
             .SetLoops(-1, LoopType.Restart)
             .SetEase(Ease.Linear)

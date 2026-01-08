@@ -6,11 +6,13 @@ namespace App.MagicWords.Loading
     public class LoadingAnimationService : BaseDisposable
     {
         private readonly DataLoadingContent _dataLoadingContent;
+        private readonly Canvas _mainCanvas;
         private GameObject _loadingGo;
 
-        public LoadingAnimationService(DataLoadingContent dataLoadingContent)
+        public LoadingAnimationService(DataLoadingContent dataLoadingContent, Canvas mainCanvas)
         {
             _dataLoadingContent = dataLoadingContent;
+            _mainCanvas = mainCanvas;
         }
         
         public void ShowLoading()
@@ -27,7 +29,7 @@ namespace App.MagicWords.Loading
 
         private void CreateLoadingGo()
         {
-            _loadingGo = Object.Instantiate(_dataLoadingContent.LoadingPrefab);
+            _loadingGo = Object.Instantiate(_dataLoadingContent.LoadingPrefab, _mainCanvas.transform);
             LinkDisposable(new GameObjectDisposer(_loadingGo));
         }
     }

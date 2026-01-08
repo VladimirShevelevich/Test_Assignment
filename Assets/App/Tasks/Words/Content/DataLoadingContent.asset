@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: MagicWords::App.MagicWords.DataLoadingContent
   <DataUrl>k__BackingField: https://private-624120-softgamesassignment.apiary-mock.com/v3/magicwords
   <LoadingErrorErrorMessagePrefab>k__BackingField: {fileID: 8508938002134289656, guid: 529ec2924256d92429b483f9fea620c9, type: 3}
-  <LoadingPrefab>k__BackingField: {fileID: 7357411813777462089, guid: 56b0fd79f4564cc4abe5150e1cc2500b, type: 3}
+  <LoadingPrefab>k__BackingField: {fileID: 675871119477922546, guid: 8155745dac5ee8648abfb4ff69e267b3, type: 3}
