@@ -13,7 +13,7 @@ namespace App.Tools
             _gameObject = gameObject;
         }
 
-        public GameObjectDisposer(MonoBehaviour monoBehaviour)
+        public GameObjectDisposer(Component monoBehaviour)
         {
             _gameObject = monoBehaviour.gameObject;
         }
