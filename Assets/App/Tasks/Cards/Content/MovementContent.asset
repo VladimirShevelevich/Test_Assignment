@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6c431e0d4c42b9adc6db12950d74b9, type: 3}
   m_Name: MovementContent
   m_EditorClassIdentifier: Cards::App.AceOfShadows.MovementContent
-  <MoveDuration>k__BackingField: 0.1
+  <MoveDuration>k__BackingField: 0.5
   <MoveTimeInterval>k__BackingField: 1
