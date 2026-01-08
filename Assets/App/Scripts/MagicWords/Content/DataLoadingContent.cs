@@ -6,7 +6,7 @@ namespace App.MagicWords
     public class DataLoadingContent : ScriptableObject
     {
         [field: SerializeField] public string DataUrl { get; private set; }
-        [field: SerializeField] public MessageView LoadingErrorMessagePrefab { get; private set; }
+        [field: SerializeField] public ErrorMessageView LoadingErrorErrorMessagePrefab { get; private set; }
         [field: SerializeField] public GameObject LoadingPrefab { get; private set; }
     }
 }

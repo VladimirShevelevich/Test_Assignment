@@ -12,18 +12,18 @@ namespace App.MagicWords
     {
         private readonly AvatarsDataLoader _avatarsDataLoader;
         private readonly RemoteContentFetcher _remoteContentFetcher;
-        private readonly LoadingService _loadingService;
+        private readonly LoadingAnimationService _loadingAnimationService;
         private readonly LifetimeScope _magicWordsScope;
 
         //Object dispose handling token
         private readonly CancellationTokenSource lifetimeCts = new();
         
         public InitializationQueue(RemoteContentFetcher remoteContentFetcher,
-            LoadingService loadingService,
+            LoadingAnimationService loadingAnimationService,
             LifetimeScope magicWordsScope)
         {
             _remoteContentFetcher = remoteContentFetcher;
-            _loadingService = loadingService;
+            _loadingAnimationService = loadingAnimationService;
             _magicWordsScope = magicWordsScope;
         }
         
@@ -35,7 +35,7 @@ namespace App.MagicWords
 
         private async UniTaskVoid InitializeAsync()
         {
-            _loadingService.ShowLoading();
+            _loadingAnimationService.ShowLoading();
             
             try
             {
@@ -48,7 +48,7 @@ namespace App.MagicWords
             }
             
             Debug.Log("Initialization has been completed");
-            _loadingService.HideLoading();
+            _loadingAnimationService.HideLoading();
             CreateDialogueScope();
         }
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace App.MagicWords
+﻿namespace App.MagicWords
 {
     public class DialogueData
     {

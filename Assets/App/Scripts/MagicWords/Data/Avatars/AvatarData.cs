@@ -1,7 +1,6 @@
-﻿using App.MagicWords;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace App.Scripts.MagicWords
+namespace App.MagicWords
 {
     public class AvatarData
     {

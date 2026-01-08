@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using App.Scripts.MagicWords;
 using App.Tools;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

@@ -4,10 +4,14 @@ using Cysharp.Threading.Tasks;
 
 namespace App.MagicWords
 {
+    
+    /// <summary>
+    /// Override local data by remote data
+    /// </summary>
     public class RemoteContentFetcher
     {
         private readonly RemoteContentLoader _remoteContentLoader;
-        private readonly MessageService _messageService;
+        private readonly ErrorMessageService _errorMessageService;
         private readonly DataLoadingContent _dataLoadingContent;
         private readonly DialogueContent _dialogueContent;
 

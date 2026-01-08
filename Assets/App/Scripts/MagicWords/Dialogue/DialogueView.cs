@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.MagicWords;
 using UnityEngine;
 using VContainer;
 
@@ -25,17 +24,13 @@ namespace App.MagicWords
 
         private void CreateLine(DialogueData dialogueData, AvatarData avatarData)
         {
-            var prefab = avatarData == null || avatarData.Position == AvatarPosition.left ?
-                _dialogueContent.DialogueLineLeft : 
-                _dialogueContent.DialogueLineRight;
+            var prefab = GetLinePrefab(avatarData);
             var line = Instantiate(prefab, transform);
+            line.SetName(dialogueData.name);
             line.SetText(dialogueData.text);
 
-            if (avatarData != null)
-            {
+            if (avatarData != null) 
                 line.SetAvatarSprite(avatarData.Sprite);
-                line.SetName(avatarData.Name);
-            }
             
             _lines.Add(line.gameObject);
 
@@ -43,6 +38,13 @@ namespace App.MagicWords
             {
                 DestroyLastLine();
             }
+        }
+
+        private DialogueLine GetLinePrefab(AvatarData avatarData)
+        {
+            return avatarData == null || avatarData.Position == AvatarPosition.left ?
+                _dialogueContent.DialogueLineLeft : 
+                _dialogueContent.DialogueLineRight;
         }
 
         private void DestroyLastLine()

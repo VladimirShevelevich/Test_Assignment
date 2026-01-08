@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.MagicWords
+﻿namespace App.MagicWords
 {
     public static class AvatarDataDuplicateHandler
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.MagicWords;
 using UnityEngine;
 
 namespace App.MagicWords

@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace App.MagicWords
 {
+    
+    /// <summary>
+    /// Controls the dialogue sequence
+    /// </summary>
     public class DialoguePresenter : BaseDisposable
     {
         private readonly DialogueContent _dialogueContent;
@@ -38,7 +42,6 @@ namespace App.MagicWords
                 
                 if (_lifeTimeToken.IsCancellationRequested)
                     return;
-
             }
         }
 

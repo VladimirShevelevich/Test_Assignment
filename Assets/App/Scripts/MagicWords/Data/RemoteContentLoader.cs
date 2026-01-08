@@ -6,13 +6,16 @@ using UnityEngine;
 
 namespace App.MagicWords
 {
+    /// <summary>
+    /// Loads the remote data and display the error message
+    /// </summary>
     public class RemoteContentLoader
     {
-        private readonly MessageService _messageService;
+        private readonly ErrorMessageService _errorMessageService;
 
-        public RemoteContentLoader(MessageService messageService)
+        public RemoteContentLoader(ErrorMessageService errorMessageService)
         {
-            _messageService = messageService;
+            _errorMessageService = errorMessageService;
         }
         
         public async UniTask<RemoteData> LoadDataAsync(string url, CancellationToken ctsToken)
@@ -52,7 +55,7 @@ namespace App.MagicWords
 
         private void ShowLoadingFailedMessage(Action onRepeatCalled)
         {
-            _messageService.ShowLoadingFailedMessage(onRepeatCalled);
+            _errorMessageService.ShowLoadingFailedMessage(onRepeatCalled);
         }
     }
 }

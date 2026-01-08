@@ -14,8 +14,8 @@ namespace App.MagicWords
             _content.Register(builder);
             builder.Register<RemoteContentLoader>(Lifetime.Scoped);
             builder.Register<RemoteContentFetcher>(Lifetime.Scoped);
-            builder.Register<MessageService>(Lifetime.Scoped);
-            builder.Register<LoadingService>(Lifetime.Scoped);
+            builder.Register<ErrorMessageService>(Lifetime.Scoped);
+            builder.Register<LoadingAnimationService>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>
             {
                 ep.Add<InitializationQueue>();
