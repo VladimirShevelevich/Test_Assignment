@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2744839103563118423, guid: 3c81d32bc1bb56e43bb5b53c8bc3b024, type: 3}
       propertyPath: m_Name
-      value: DialogueLineLeft Variant
+      value: DialogueLineRight
       objectReference: {fileID: 0}
     - target: {fileID: 7653009759769046741, guid: 3c81d32bc1bb56e43bb5b53c8bc3b024, type: 3}
       propertyPath: m_Pivot.x
@@ -151,6 +151,10 @@ PrefabInstance:
     - target: {fileID: 7838308812981467609, guid: 3c81d32bc1bb56e43bb5b53c8bc3b024, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 135.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099679044180165771, guid: 3c81d32bc1bb56e43bb5b53c8bc3b024, type: 3}
+      propertyPath: m_fontSize
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
