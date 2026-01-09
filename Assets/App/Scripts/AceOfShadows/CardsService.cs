@@ -6,11 +6,8 @@ using VContainer.Unity;
 
 namespace App.AceOfShadows
 {
-    public class CardsService : BaseDisposable, IInitializable
+    public class CardsService : BaseDisposable, IInitializable, ICardsService
     {        
-        /// <summary>
-        /// All cards have been moved
-        /// </summary>
         public IObservable<Unit> OnMovingComplete => _cardsMover.OnMovingComplete;
         
         private readonly DeckFactory _deckFactory;

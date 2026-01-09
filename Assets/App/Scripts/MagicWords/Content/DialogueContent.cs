@@ -12,6 +12,7 @@ namespace App.MagicWords
         [field: SerializeField] public int MaxLinesCount { get; private set; }
         [field: SerializeField] public float DialogueDisplayInterval { get; private set; }
         
+        //Overridden by remote
         public List<DialogueData> Dialogues { get; set; }
         public List<AvatarData> Avatars { get; set; }
     }

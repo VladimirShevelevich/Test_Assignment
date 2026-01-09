@@ -26,7 +26,7 @@ namespace App.MagicWords
 
         private void CreateMessage(Action onRepeatCalled)
         {
-            _errorMessage = Object.Instantiate(_dataLoadingContent.LoadingErrorErrorMessagePrefab, _mainCanvas.transform);
+            _errorMessage = Object.Instantiate(_dataLoadingContent.LoadingErrorMessagePrefab, _mainCanvas.transform);
             LinkDisposable(new GameObjectDisposer(_errorMessage.gameObject));
             _errorMessage.OnRepeatCalled.Subscribe(_ =>
             {

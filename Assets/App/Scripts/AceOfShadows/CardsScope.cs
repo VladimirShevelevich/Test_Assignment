@@ -14,7 +14,7 @@ namespace App.AceOfShadows
             builder.Register<DeckFactory>(Lifetime.Scoped);
             builder.UseEntryPoints(ep =>
             {
-                ep.Add<CardsService>().AsSelf();
+                ep.Add<CardsService>();
                 ep.Add<MessagePresenter>();
             });
         }

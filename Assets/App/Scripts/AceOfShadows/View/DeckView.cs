@@ -13,7 +13,7 @@ namespace App.AceOfShadows
         private DecksContent _decksContent;
         
         /// <summary>
-        /// An index used to handle attached cards sorting
+        /// An index used to control the sorting of attached cards
         /// </summary>
         private int _deckOrderIndex;
 
@@ -38,7 +38,7 @@ namespace App.AceOfShadows
         }
 
         /// <summary>
-        /// Deattach the transfrom and return
+        /// Detach the transfrom and return
         /// </summary>
         public CardView PopCard()
         {

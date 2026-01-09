@@ -10,10 +10,10 @@ namespace App.AceOfShadows
     {
         [SerializeField] private DeckView _deckView;
         [SerializeField] private TMP_Text _counterText;
-        private CardsService _cardsService;
+        private ICardsService _cardsService;
 
         [Inject]
-        public void Construct(CardsService cardsService)
+        public void Construct(ICardsService cardsService)
         {
             _cardsService = cardsService;
         }

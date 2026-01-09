@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace App.MagicWords.Loading
 {
-    public class LoadingAnimationService : BaseDisposable
+    public class LoadingAnimationService : BaseDisposable, ILoadingAnimationService
     {
         private readonly DataLoadingContent _dataLoadingContent;
         private readonly Canvas _mainCanvas;

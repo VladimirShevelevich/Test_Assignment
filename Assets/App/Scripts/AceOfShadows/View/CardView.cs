@@ -11,6 +11,9 @@ namespace App.AceOfShadows
             _spriteRenderer.sprite = sprite;
         }
 
+        /// <summary>
+        /// Explicitly sets an order index to avoid the sorting order issue 
+        /// </summary>
         public void SetOrderIndex(int index)
         {
             _spriteRenderer.sortingOrder = index;
